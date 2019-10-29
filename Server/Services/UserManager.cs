@@ -46,6 +46,11 @@ namespace ActorsCafe
             }
         }
 
+        public User Show(string token)
+        {
+            return users!.FindOne(u => u.Token == token);
+        }
+
         public IEnumerable<User> EnumerateAll()
         {
             return users!.FindAll();
