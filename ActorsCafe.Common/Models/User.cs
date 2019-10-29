@@ -2,7 +2,7 @@ using System;
 
 namespace ActorsCafe
 {
-    public class UserResponse
+    public class User
     {
         /// <summary>
         /// ユーザーを識別する一意の ID を取得または設定します。

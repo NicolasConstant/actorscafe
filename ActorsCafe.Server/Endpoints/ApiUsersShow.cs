@@ -12,7 +12,7 @@ namespace ActorsCafe.Endpoints
             var name = GetOptional<string>(param, "userName");
             var host = GetOptional<string>(param, "host");
 
-            User? user;
+            InternalUser? user;
 
             if (id != null)
                 user = Users.Show(id: id);

@@ -3,15 +3,15 @@ namespace ActorsCafe
     /// <summary>
     /// ユーザーを定義します。
     /// </summary>
-    public class User : UserResponse
+    public class InternalUser : User
     {
         public string Password { get; set; } = "";
 
         public string Token { get; set; } = "";
 
-        public UserResponse Pack()
+        public User Pack()
         {
-            return new UserResponse
+            return new User
             {
                 Id = Id,
                 Name = Name,

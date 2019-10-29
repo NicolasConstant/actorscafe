@@ -12,12 +12,12 @@ namespace ActorsCafe
             (db, users) = GetRepository();
         }
 
-        public User CreateNewUser(string name, string hash)
+        public InternalUser CreateNewUser(string name, string hash)
         {
             if (users!.Exists(f => f.Name.ToLowerInvariant() == name.ToLowerInvariant()))
                 throw new ArgumentException("already exists");
             var ts = DateTime.Now;
-            var u = new User
+            var u = new InternalUser
             {
                 Name = name,
                 Id = UniqueId.Generate(),
@@ -30,7 +30,7 @@ namespace ActorsCafe
             return u;
         }
 
-        public User Show(string? id = null, string? name = null, string? host = null)
+        public InternalUser Show(string? id = null, string? name = null, string? host = null)
         {
             if (id != null)
             {
@@ -46,20 +46,20 @@ namespace ActorsCafe
             }
         }
 
-        public User Show(string token)
+        public InternalUser Show(string token)
         {
             return users!.FindOne(u => u.Token == token);
         }
 
-        public IEnumerable<User> EnumerateAll()
+        public IEnumerable<InternalUser> EnumerateAll()
         {
             return users!.FindAll();
         }
 
-        private (LiteDatabase, LiteCollection<User>) GetRepository()
+        private (LiteDatabase, LiteCollection<InternalUser>) GetRepository()
         {
             var db = Server.GetDatabase();
-            var c = db.GetCollection<User>("users");
+            var c = db.GetCollection<InternalUser>("users");
             c.EnsureIndex(u => u.Id, true);
             return (db, c);
         }
@@ -70,6 +70,6 @@ namespace ActorsCafe
         }
 
         private LiteDatabase? db;
-        private LiteCollection<User>? users;
+        private LiteCollection<InternalUser>? users;
     }
 }
