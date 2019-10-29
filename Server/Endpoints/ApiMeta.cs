@@ -1,30 +1,17 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace ActorsCafe.Endpoints
 {
-    [ApiController]
     [Route("api/meta")]
     public class ApiMeta : ApiController
     {
-        [HttpPost]
-        public IActionResult Post()
+        public override object Handle(JObject param, string token)
         {
-            return Json(new {
+            return new {
                 Name = "ActorsCafé",
                 Description = "A fediverse star",
-            });
-        }
-    }
-
-    [ApiController]
-    [Route("api/users/all")]
-    public class ApiUsersAll : ApiController
-    {
-        [HttpPost]
-        public IActionResult Post()
-        {
-            return Json(Users.EnumerateAll().Select(u => u.Pack()));
+            };
         }
     }
 }

@@ -18,7 +18,5 @@ namespace ActorsCafe
 
         // avoid instantiate
         private Server() { }
-
-        private static readonly string dbPath = "./database.db";
     }
 }

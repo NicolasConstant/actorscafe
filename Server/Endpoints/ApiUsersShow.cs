@@ -3,12 +3,10 @@ using Newtonsoft.Json.Linq;
 
 namespace ActorsCafe.Endpoints
 {
-    [ApiController]
     [Route("api/users/show")]
     public class ApiUsersShow : ApiController
     {
-        [HttpPost]
-        public IActionResult Post([FromBody] JObject param)
+        public override object Handle(JObject param, string token)
         {
             var id = GetOptional<string>(param, "id");
             var name = GetOptional<string>(param, "userName");
@@ -21,9 +19,9 @@ namespace ActorsCafe.Endpoints
             else if (name != null)
                 user = Users.Show(name: name, host: host);
             else
-                return Error(404, "specify id or name");
+                throw new HttpErrorException(404, "specify id or name");
             
-            return user == null ? Error(401, "no such user") : (IActionResult)Json(user.Pack());
+            return user?.Pack() ?? throw new HttpErrorException(404, "No such user");
         }
     }
 }

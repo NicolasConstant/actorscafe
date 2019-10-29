@@ -5,12 +5,10 @@ using Crypt = BCrypt.Net.BCrypt;
 
 namespace ActorsCafe.Endpoints
 {
-    [ApiController]
     [Route("api/signup")]
     public class ApiSignUp : ApiController
     {
-        [HttpPost]
-        public IActionResult Post([FromBody] JObject param)
+        public override object Handle(JObject param, string token)
         {
             try
             {

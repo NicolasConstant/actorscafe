@@ -5,34 +5,25 @@ using Crypt = BCrypt.Net.BCrypt;
 
 namespace ActorsCafe.Endpoints
 {
-    [ApiController]
     [Route("api/signin")]
     public class ApiSignIn : ApiController
     {
-        [HttpPost]
-        public IActionResult Post([FromBody] JObject param)
+        public override object Handle(JObject param, string token)
         {
-            try
-            {
-                var name = GetRequired<string>(param, "userName");
-                var password = GetRequired<string>(param, "password");
+            var name = GetRequired<string>(param, "userName");
+            var password = GetRequired<string>(param, "password");
 
-                var hashed = Crypt.HashPassword(password);
+            var hashed = Crypt.HashPassword(password);
 
-                var user = Server.I.UserManager.Show(name: name);
+            var user = Server.I.UserManager.Show(name: name);
 
-                if (hashed != user.Password)
-                    throw new ArgumentException("password incorrect");
+            if (hashed != user.Password)
+                throw new HttpErrorException(400, "password incorrect");
 
-                return Json(new {
-                    Token = user.Token,
-                    User = user.Pack(),
-                });
-            }
-            catch (ArgumentException ex)
-            {
-                return Error(401, ex.Message);
-            }
+            return new {
+                Token = user.Token,
+                User = user.Pack(),
+            };
         }
     }
 }
