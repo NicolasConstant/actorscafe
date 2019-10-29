@@ -19,14 +19,14 @@ namespace ActorsCafe.Endpoints
 
                 var user = Server.I.UserManager.CreateNewUser(name, hashed);
 
-                return Json(new {
+                return new {
                     Token = user.Token,
                     User = user.Pack(),
-                });
+                };
             }
             catch (ArgumentException ex)
             {
-                return Error(401, ex.Message);
+                throw new HttpErrorException(400, ex.Message);
             }
         }
     }
