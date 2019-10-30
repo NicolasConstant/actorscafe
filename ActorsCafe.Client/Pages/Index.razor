@@ -1,6 +1,5 @@
 ﻿@page "/"
 @inject HttpClient Http
-@using Newtonsoft.Json;
 
 @switch (Mode)
 {
@@ -51,7 +50,6 @@
 
     public IndexMode Mode { get; set; } = IndexMode.Welcome;
 
-    public HttpClient httpClient = new HttpClient();
 
     public void SignIn()
     {
@@ -60,7 +58,7 @@
 
     public void SignUp()
     {
-        httpClient.PostAsync("https://localhost:5001/api/signup", new StringContent(JsonConvert.SerializeObject(new {
+        Http.PostAsync("https://localhost:5001/api/signup", new StringContent(JsonConvert.SerializeObject(new {
             userName = UserName,
             password = Password,
         })));
