@@ -1,0 +1,58 @@
+@using System.Threading.Tasks
+@inject ActorsOS os
+
+@switch (Mode)
+{
+    case State.Welcome:
+        <button @onclick="() => Mode = State.SignUp">新規登録</button>
+        <button @onclick="() => Mode = State.SignIn">ログイン</button>
+        break;
+    case State.SignIn:
+        <SignInForm
+            Back="() => Back()"
+            SignIn="SignIn"
+            Error="@Error"
+        />
+        break;
+    case State.SignUp:
+        <SignUpForm
+            Back="() => Back()"
+            SignUp="SignUp"
+            Error="@Error"
+        />
+        break;
+}
+
+@code {
+
+    public bool Confirmed { get; set; }
+
+    public State Mode { get; set; } = State.Welcome;
+
+    public Exception Error { get; set; }
+
+    public async void SignIn(string name, string pass) {
+        try {
+            await os.SignInAsync(name, pass);
+        } catch (Exception e) {
+            Error = e;
+        }
+    }
+
+    public async void SignUp(string name, string pass) {
+        try {
+            await os.SignUpAsync(name, pass);
+        } catch (Exception e) {
+            Error = e;
+        }
+    }
+
+    public void Back() {
+        Mode = State.Welcome;
+        Error = null;
+    }
+
+    public enum State {
+        Welcome, SignUp, SignIn
+    }
+}

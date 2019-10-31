@@ -1,0 +1,37 @@
+@inject LocalStorage storage
+@inject HttpClient cli
+@inject ActorsOS os
+
+<h2>
+    @(os.User.ProfileName ?? os.User.Name)&emsp;
+    <small>Acct</small>
+</h2>
+
+@if (os.User.AvatarUrl != null) 
+{
+    <img src="@os.User.AvatarUrl" />
+}
+
+<p>@(os.User.Description ?? "説明はありません。")</p>
+
+<p>@os.User.PostsCount 投稿 @os.User.FollowingsCount フォロー @os.User.FollowersCount フォロワー</p>
+
+<p>
+    @(os.User.IsBot ? "🤖" : "")
+    @(os.User.IsCat ? "😺" : "")
+</p>
+
+<button @onclick="SignOut">ログアウト</button>
+
+@code {
+    public string Acct {
+        get {
+            return "@" + (os.User.Host != null ? $"{os.User.Name}@{os.User.Host}" : os.User.Name);
+        }
+    }
+
+    public async void SignOut()
+    {
+        await os.SignOutAsync();
+    }
+}

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Blazor.Hosting;
+﻿using System.Net.Http;
+using Microsoft.AspNetCore.Blazor.Hosting;
 
 namespace ActorsCafe.Client
 {
