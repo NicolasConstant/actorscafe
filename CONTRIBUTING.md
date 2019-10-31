@@ -25,6 +25,8 @@ DotFeather uses AppVeyor to automatic deployment. Its configuration is in `/appv
 
 ## Coding Style
 
+### C#
+
 Basically I compliant [C# Coding Conventions (Official)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions). Moreover, follow the rules below:
 
 + Use 4-character tabs for indentation
@@ -41,6 +43,10 @@ Basically I compliant [C# Coding Conventions (Official)](https://docs.microsoft.
 + If you overload methods, locate them adjacently.
 + Define an entrypoint method in a dedicated `static` class.
 + Make string-variables non-null, and initialize them with empty string.
+
+### TypeScript
+
+Follow TSLint.
 
 <!-- 
 ## To deploy

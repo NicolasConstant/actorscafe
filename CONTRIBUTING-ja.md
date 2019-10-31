@@ -23,6 +23,8 @@ DotFeather では、 AppVeyor を用いてデプロイの自動化を行って�
 
 ## コーディング規則
 
+### C#
+
 基本的には [C# のコーディング規則(公式)](https://docs.microsoft.com/ja-jp/dotnet/csharp/programming-guide/inside-a-program/coding-conventions) に従います。その上で、次の規約に従うこと
 
 - インデントは4文字タブ(ハードタブ)にすること。
@@ -40,6 +42,10 @@ DotFeather では、 AppVeyor を用いてデプロイの自動化を行って�
 - メソッドをオーバーロードする場合は連続して配置すること。
 - エントリポイントは専用の `static` クラスに定義すること。
 - 文字列変数は基本的に Null 非許容とし、初期値として空文字列を挿入すること。
+
+### TypeScript
+
+TSLint に従うこと。
 
 <!-- ## デプロイ手順
 

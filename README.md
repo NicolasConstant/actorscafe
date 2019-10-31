@@ -9,6 +9,10 @@ ActorsCafé is a microblogging web application. This implements ActivityPub, so 
 
 You can post your opinions, repost other users' one, and react them by using Emoji 🙃
 
+## Features
+
+[See more features information...](docs/features.md)
+
 ## Build
 
 simply `dotnet build`
