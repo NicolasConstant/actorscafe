@@ -15,5 +15,5 @@ export interface User {
     isCat: boolean;
     isAdmin: boolean;
     isModerator: boolean;
-    Host?: string;
+    host?: string;
 }
