@@ -2,10 +2,11 @@ import React from "react";
 import { User } from "../models/User";
 import { Link } from "react-router-dom";
 import { useStore } from "../store/module";
+import { toAcctString } from "../helpers/toAcctString";
 
 export function UserHeader(props: { user: User }) {
     const u = props.user;
-    const acct = u.host ? `@${u.name}@${u.host}` : `@${u.name}`;
+    const acct = toAcctString(u);
     const store = useStore();
 
     return (

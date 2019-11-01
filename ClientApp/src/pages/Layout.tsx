@@ -17,6 +17,7 @@ export function Layout (props: any) {
               <Link to="/settings">設定</Link>
             </Fragment>
           ) : null}
+          <Link to="/directory">ディレクトリ</Link>
         </div>
         <hr />
       </header>

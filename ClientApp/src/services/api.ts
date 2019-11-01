@@ -11,7 +11,7 @@ export const apiClient = Axios.create({
     validateStatus: _ => true,
 });
 
-export const postAsync = async <T = any>(endPoint: string, content: any) => {
+export const postAsync = async <T = any>(endPoint: string, content: any = {}) => {
     const res = await apiClient.post(endPoint, content);
 
     if (res.status < 400) {
