@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { mod } from "../store/module";
 import { useDispatch } from "react-redux";
 import { signUpAsync, signInAsync } from "../services/api";
+import { AxiosError } from "axios";
+import { ApiError } from "../services/ApiError";
 
 export type WelcomeMode = "welcome" | "signup" | "signin";
 
@@ -11,6 +13,7 @@ export function Welcome(_: any) {
         userName: "",
         password: "",
         passwordConfirm: "",
+        error: "",
         confirmToToS: false,
     });
     const dispatch = useDispatch();
@@ -18,17 +21,28 @@ export function Welcome(_: any) {
     const updateState = (obj: any) => setState(prev=> ({...prev, ...obj}));
 
     async function handleSignUp() {
-        const res = (await signUpAsync(state.userName, state.password)).data;
-        dispatch(mod.actions.setToken(res));
+        try {
+            const res = (await signUpAsync(state.userName, state.password));
+            dispatch(mod.actions.setToken(res));
+        } catch (err) {
+            updateState({error: err.message});
+            return;
+        }
     }
 
     async function handleSignIn() {
-        const res = (await signInAsync(state.userName, state.password)).data;
-        dispatch(mod.actions.setToken(res));
+        try {
+            const res = (await signInAsync(state.userName, state.password));
+            dispatch(mod.actions.setToken(res));
+        } catch (err) {
+            updateState({error: err.message});
+            return;
+        }
     }
 
     function handleBackClick() {
         updateState({current: "welcome"});
+        updateState({error: ""});
     }
 
     switch (state.current) {
@@ -51,6 +65,7 @@ export function Welcome(_: any) {
                     <label>
                         パスワード: <input type="password" value={state.password} onChange={ev => updateState({password: ev.target.value})} />
                     </label>
+                    { state.error ? <p style={{color: "red", fontWeight: "bold"}}>{state.error}</p> : null}
                     <button onClick={handleSignIn}>ログイン</button>
                 </div>
             );
@@ -73,6 +88,7 @@ export function Welcome(_: any) {
                             <input type="checkbox" checked={state.confirmToToS} onChange={ev => updateState({confirmToToS: ev.target.checked})} />
                             <a href="#">利用規約(まだないよ)</a>に同意する
                         </label>
+                        { state.error ? <p style={{color: "red", fontWeight: "bold"}}>{state.error}</p> : null}
                         <button onClick={handleSignUp}>登録</button>
                     </div>
                 );
