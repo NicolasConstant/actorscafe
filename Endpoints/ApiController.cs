@@ -31,7 +31,7 @@ namespace ActorsCafe.Endpoints
             }
             catch (Exception ex)
             {
-                return Error(500, ex.Message, ex.StackTrace ?? "");
+                return Error(500, ex.Message, ex.StackTrace ?? "", ex.GetType().Name);
             }
         }
 
@@ -44,13 +44,14 @@ namespace ActorsCafe.Endpoints
             });
         }
 
-        public ObjectResult Error(int status, string error, string stackTrace)
+        public ObjectResult Error(int status, string error, string stackTrace, string typeName)
         {
             return StatusCode(status, new
             {
                 Status = status,
                 Message = error,
                 StackTrace = stackTrace,
+                type = typeName,
             });
         }
 

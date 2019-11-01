@@ -10,13 +10,15 @@ namespace ActorsCafe.Endpoints
     {
         public override object Handle(JObject param, string token)
         {
-            try
-            {
                 var name = GetRequired<string>(param, "userName");
                 var password = GetRequired<string>(param, "password");
 
-                var hashed = Crypt.HashPassword(password);
+                if (!name.IsValidUserName())
+                    throw new HttpErrorException(400, "invalid user name");
 
+                var hashed = Crypt.HashPassword(password);
+            try
+            {
                 var user = Server.I.UserManager.CreateNewUser(name, hashed);
 
                 return new {

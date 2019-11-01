@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ActorsCafe.Internal;
 using LiteDB;
 
 namespace ActorsCafe
@@ -16,6 +17,9 @@ namespace ActorsCafe
         {
             if (users!.Exists(f => f.Name.ToLowerInvariant() == name.ToLowerInvariant()))
                 throw new ArgumentException("already exists");
+            if (!name.IsValidUserName()) {
+                throw new ArgumentException("invalid user name");
+            }
             var ts = DateTime.Now;
             var u = new InternalUser
             {
@@ -30,7 +34,7 @@ namespace ActorsCafe
             return u;
         }
 
-        public InternalUser Show(string? id = null, string? name = null, string? host = null)
+        public InternalUser? Show(string? id = null, string? name = null, string? host = null)
         {
             if (id != null)
             {
