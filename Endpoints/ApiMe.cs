@@ -1,3 +1,4 @@
+using ActorsCafe.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -8,9 +9,9 @@ namespace ActorsCafe.Endpoints
     {
         public override bool IsConfidential => true;
 
-        public override object Handle(JObject param, string token)
+        public override object Handle(JObject param, string token, InternalUser? user)
         {
-            return Users.Show(token).Pack();
+            return user!.Pack();
         }
     }
 }

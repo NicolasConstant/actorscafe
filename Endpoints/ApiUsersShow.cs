@@ -1,3 +1,4 @@
+using ActorsCafe.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -6,7 +7,7 @@ namespace ActorsCafe.Endpoints
     [Route("api/users/show")]
     public class ApiUsersShow : ApiController
     {
-        public override object Handle(JObject param, string token)
+        public override object Handle(JObject param, string token, InternalUser? _)
         {
             var id = GetOptional<string>(param, "id");
             var name = GetOptional<string>(param, "userName");

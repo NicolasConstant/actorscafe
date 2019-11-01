@@ -1,4 +1,6 @@
-namespace ActorsCafe
+using System.Collections.Generic;
+
+namespace ActorsCafe.Internal
 {
     /// <summary>
     /// ユーザーを定義します。
@@ -8,6 +10,8 @@ namespace ActorsCafe
         public string Password { get; set; } = "";
 
         public string Token { get; set; } = "";
+
+        public List<string> Follows { get; set; } = new List<string>();
 
         public User Pack()
         {

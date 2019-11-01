@@ -1,4 +1,5 @@
 using System;
+using ActorsCafe.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Crypt = BCrypt.Net.BCrypt;
@@ -8,7 +9,7 @@ namespace ActorsCafe.Endpoints
     [Route("api/signup")]
     public class ApiSignUp : ApiController
     {
-        public override object Handle(JObject param, string token)
+        public override object Handle(JObject param, string token, InternalUser? _)
         {
                 var name = GetRequired<string>(param, "userName");
                 var password = GetRequired<string>(param, "password");

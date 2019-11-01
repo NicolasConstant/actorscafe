@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ActorsCafe.Internal;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 namespace ActorsCafe.Endpoints
@@ -6,7 +7,7 @@ namespace ActorsCafe.Endpoints
     [Route("api/meta")]
     public class ApiMeta : ApiController
     {
-        public override object Handle(JObject param, string token)
+        public override object Handle(JObject param, string token, InternalUser? user)
         {
             return new {
                 Name = "ActorsCafé",

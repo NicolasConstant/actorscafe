@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ActorsCafe
 {
@@ -83,6 +84,31 @@ namespace ActorsCafe
         /// この <see cref="User"/> がモデレーターであるかどうか示す値を取得または設定します。
         /// </summary>
         public bool IsModerator { get; set; }
+        
+        /// <summary>
+        /// この <see cref="User"/> が自分をブロックしているかどうかを示す値を取得または設定します。
+        /// </summary>
+        public bool? IsBlockingMe { get; set; }
+        
+        /// <summary>
+        /// この <see cref="User"/> が自分にブロックされているかどうかを示す値を取得または設定します。
+        /// </summary>
+        public bool? IsBlocked { get; set; }
+        
+        /// <summary>
+        /// この <see cref="User"/> が自分にミュートされているかどうかを示す値を取得または設定します。
+        /// </summary>
+        public bool? IsMuted { get; set; }
+        
+        /// <summary>
+        /// この <see cref="User"/> が自分をフォローしているかどうかを示す値を取得または設定します。
+        /// </summary>
+        public bool? IsFollowingMe { get; set; }
+        
+        /// <summary>
+        /// この <see cref="User"/> が自分にフォローされているかどうかを示す値を取得または設定します。
+        /// </summary>
+        public bool? IsFollowed { get; set; }
 
         /// <summary>
         /// この <see cref="User"/> の所属するホストアドレスを取得または設定します。空文字列であればローカルユーザーです。

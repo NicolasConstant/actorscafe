@@ -1,4 +1,5 @@
 using System.Linq;
+using ActorsCafe.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -7,7 +8,7 @@ namespace ActorsCafe.Endpoints
     [Route("api/users/all")]
     public class ApiUsersAll : ApiController
     {
-        public override object Handle(JObject obj, string token)
+        public override object Handle(JObject obj, string token, InternalUser? user)
         {
             return Users.EnumerateAll().Select(u => u.Pack());
         }

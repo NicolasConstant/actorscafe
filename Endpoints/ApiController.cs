@@ -1,4 +1,5 @@
 using System;
+using ActorsCafe.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -10,6 +11,8 @@ namespace ActorsCafe.Endpoints
         public Server Server => Server.I;
 
         public UserManager Users => Server.I.UserManager;
+
+        public PostManager Posts => Server.I.PostManager;
 
         public virtual bool IsConfidential => false;
 
@@ -23,7 +26,13 @@ namespace ActorsCafe.Endpoints
                 {
                     return Error(401, "Not authorized");
                 }
-                return Json(Handle(param, token ?? ""));
+                InternalUser? user = null;
+                if (token != null && (user = Users.Show(token)) == null)
+                {
+                    return Error(401, "Invalid token");
+                }
+                
+                return Json(Handle(param, token ?? "", user));
             }
             catch (HttpErrorException ex)
             {
@@ -66,6 +75,17 @@ namespace ActorsCafe.Endpoints
             return res?.ToObject<T>();
         }
 
-        public abstract object Handle(JObject param, string token);
+        public T GetRequiredValue<T>(JObject obj, string key) where T : struct
+        {
+            return GetOptionalValue<T>(obj, key) ?? throw new HttpErrorException(400, $"{key} required");
+        }
+
+        public T? GetOptionalValue<T>(JObject obj, string key) where T : struct
+        {
+            obj.TryGetValue(key, out var res);
+            return res?.ToObject<T>();
+        }
+
+        public abstract object Handle(JObject param, string token, InternalUser? user);
     }
 }
