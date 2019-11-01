@@ -25,9 +25,9 @@ namespace ActorsCafe.Endpoints
                 }
                 return Json(Handle(param, token ?? ""));
             }
-            catch (ArgumentException ex)
+            catch (HttpErrorException ex)
             {
-                return Error(404, ex.Message);
+                return Error(ex.Status, ex.Message);
             }
             catch (Exception ex)
             {
