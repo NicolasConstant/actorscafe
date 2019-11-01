@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { useStore } from '../store/module';
 import { Link } from 'react-router-dom';
 
@@ -8,12 +8,16 @@ export function Layout (props: any) {
     <div>
       <header>
         <h1>ActorsCafé</h1>
-        {store.user ? <div>
-          <Link to="/">ホーム</Link>・
-          <Link to="/notifications">通知</Link>・
-          <Link to={`/@${store.user.name}`}>プロフィール</Link>・
-          <Link to="/settings">設定</Link>
-        </div> : null}
+        <div className="menu">
+          <Link to="/">ホーム</Link>
+          {store.user ? (
+            <Fragment>
+              <Link to="/notifications">通知</Link>
+              <Link to={`/@${store.user.name}`}>プロフィール</Link>
+              <Link to="/settings">設定</Link>
+            </Fragment>
+          ) : null}
+        </div>
         <hr />
       </header>
       <main>
