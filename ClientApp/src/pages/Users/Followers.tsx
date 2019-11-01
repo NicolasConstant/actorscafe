@@ -27,12 +27,12 @@ export function UsersFollowers(props: any) {
     if (state.error) {
         return <p>{state.error}</p>
     } else if (!u) {
-        return <p>待ちな</p>
+        return <p>取得中</p>
     } else {
         return (
             <div>
                 <UserHeader user={u}/>
-                <p>多分ここらへんにフォロワーが出てくる</p>
+                <p>ここにフォロワーを表示する予定</p>
             </div>
         );
     }

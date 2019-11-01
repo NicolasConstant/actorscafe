@@ -2,14 +2,13 @@ import React from "react";
 import { useStore, mod } from "../store/module";
 import { useDispatch } from "react-redux";
 
-export function Home(_: any) {
+export function Notifications(_: any) {
     const dispatch = useDispatch();
     const store = useStore();
     return (
         <div>
-            <h1>ホーム</h1>
-            <p>おかえりなさい、{store.user!.name} さん。</p>
-            <p>ここにタイムラインが表示される予定</p>
+            <h1>通知</h1>
+            <p>ここに通知が表示される予定</p>
         </div>
     );
 }

@@ -7,6 +7,8 @@ import { UsersFollowing } from './pages/Users/Following';
 import { UsersFollowers } from './pages/Users/Followers';
 
 import './custom.css'
+import { Notifications } from './pages/Notifications';
+import { Setting } from './pages/Setting';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -15,6 +17,8 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path='/' component={Index} />
+        <Route exact path='/notifications' component={Notifications} />
+        <Route exact path='/settings' component={Setting} />
         <Route exact path='/@:name' component={UsersIndex} />
         <Route exact path='/@:name/following' component={UsersFollowing} />
         <Route exact path='/@:name/followers' component={UsersFollowers} />

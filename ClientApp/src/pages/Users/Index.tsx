@@ -31,12 +31,12 @@ export function UsersIndex(props: any) {
     if (state.error) {
         return <p>{state.error}</p>
     } else if (!u) {
-        return <p>待ちな</p>
+        return <p>取得中</p>
     } else {
         return (
             <div>
                 <UserHeader user={u}/>
-                <p>多分ここらへんに Post とか出てくる</p>
+                <p>ここにユーザータイムラインを表示する予定</p>
             </div>
         );
     }

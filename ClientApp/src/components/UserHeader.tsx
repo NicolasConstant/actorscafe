@@ -10,7 +10,7 @@ export function UserHeader(props: { user: User }) {
 
     return (
         <div>
-            <h2>{u.profileName || u.name}</h2>
+            <h1>{u.profileName || u.name}</h1>
             <p>ID: {acct} { u.isLocked ? "🔒" : "" }</p>
             <p>{u.description || "自己紹介はありません。"}</p>
             <p>
