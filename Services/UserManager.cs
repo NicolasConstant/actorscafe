@@ -38,7 +38,7 @@ namespace ActorsCafe
             }
             else if (name != null)
             {
-                return users!.FindOne(u => u.Name == name && u.Host == host);
+                return users!.FindOne(u => u.Name.ToLowerInvariant() == name.ToLowerInvariant() && (u.Host ?? "").ToLowerInvariant() == (host ?? "").ToLowerInvariant());
             }
             else
             {
