@@ -1,0 +1,26 @@
+import React from "react";
+import { User } from "../models/User";
+import { Link } from "react-router-dom";
+import { useStore } from "../store/module";
+
+export function UserHeader(props: { user: User }) {
+    const u = props.user;
+    const acct = u.host ? `@${u.name}@${u.host}` : `@${u.name}`;
+    const store = useStore();
+
+    return (
+        <div>
+            <h2>{u.profileName || u.name}</h2>
+            <p>ID: {acct} { u.isLocked ? "🔒" : "" }</p>
+            <p>{u.description || "自己紹介はありません。"}</p>
+            <p>
+                <Link to={`/@${u.name}`}>{u.postsCount} 投稿</Link>
+                &emsp;
+                <Link to={`/@${u.name}/following`}>{u.followingsCount} フォロー</Link>
+                &emsp;
+                <Link to={`/@${u.name}/followers`}>{u.followersCount} フォロワー</Link>
+            </p>
+            { store.user && u.id !== store.user.id ? <div><button>フォローする</button></div> : null }
+        </div>
+    );
+}
