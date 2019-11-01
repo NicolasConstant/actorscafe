@@ -11,14 +11,16 @@ namespace ActorsCafe
 
         public static Server I { get; } = new Server();
 
-        public static LiteDatabase GetDatabase() => new LiteDatabase("filename=./database.db;mode=Exclusive");
+        public static LiteDatabase DatabaseRef => dbRef != null ? dbRef : dbRef = new LiteDatabase("filename=./database.db;mode=Exclusive");
 
         public void Dispose()
         {
-            UserManager.Dispose();
+            DatabaseRef?.Dispose();
         }
 
         // avoid instantiate
         private Server() { }
+
+        private static LiteDatabase? dbRef;
     }
 }

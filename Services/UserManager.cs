@@ -6,7 +6,7 @@ using LiteDB;
 
 namespace ActorsCafe
 {
-    public class UserManager : IDisposable
+    public class UserManager
     {
         public UserManager()
         {
@@ -62,15 +62,10 @@ namespace ActorsCafe
 
         private (LiteDatabase, LiteCollection<InternalUser>) GetRepository()
         {
-            var db = Server.GetDatabase();
+            var db = Server.DatabaseRef;
             var c = db.GetCollection<InternalUser>("users");
             c.EnsureIndex(u => u.Id, true);
             return (db, c);
-        }
-
-        public void Dispose()
-        {
-            ((IDisposable)db!).Dispose();
         }
 
         private LiteDatabase? db;

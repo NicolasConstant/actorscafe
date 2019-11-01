@@ -86,6 +86,7 @@ namespace ActorsCafe.Endpoints
             return res?.ToObject<T>();
         }
 
-        public abstract object Handle(JObject param, string token, InternalUser? user);
+        [Microsoft.AspNetCore.Mvc.NonAction]
+        public abstract object Handle(JObject p, string token, InternalUser? user);
     }
 }

@@ -6,7 +6,7 @@ using LiteDB;
 
 namespace ActorsCafe
 {
-    public class PostManager : IDisposable
+    public class PostManager
     {
         public PostManager()
         {
@@ -41,17 +41,25 @@ namespace ActorsCafe
             return posts?.FindById(id);
         }
 
+        public IEnumerable<PackedPost> GetAllBy(string userId, string? filterUserId)
+        {
+            // todo 公開範囲と filterUserId を使ってフィルタする
+            return posts!
+                // ユーザーに合致
+                .Include(f => f.UserId == userId)
+                // 公開投稿である
+                .Include(f => f.Visibility == Post.VISIBILITY_PUBLIC)
+                .FindAll()
+                .Select(p => new PackedPost(p))
+                .OrderByDescending(f => f.CreatedAt.Ticks);
+        }
+
         private (LiteDatabase, LiteCollection<Post>) GetRepository()
         {
-            var db = Server.GetDatabase();
+            var db = Server.DatabaseRef;
             var c = db.GetCollection<Post>("posts");
             c.EnsureIndex(p => p.Id, true);
             return (db, c);
-        }
-
-        public void Dispose()
-        {
-            ((IDisposable)db!).Dispose();
         }
 
         private LiteDatabase? db;

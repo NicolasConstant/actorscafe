@@ -11,7 +11,7 @@ namespace ActorsCafe.Internal
 
         public string Token { get; set; } = "";
 
-        public List<string> Follows { get; set; } = new List<string>();
+        public List<string> Followings { get; set; } = new List<string>();
 
         public User Pack()
         {
