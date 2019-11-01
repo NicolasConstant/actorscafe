@@ -18,6 +18,7 @@ namespace ActorsCafe
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("https://*:8443")
                 .UseStartup<Startup>();
     }
 }

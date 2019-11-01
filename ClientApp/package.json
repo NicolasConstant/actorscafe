@@ -22,6 +22,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.11.1",
     "merge": "^1.2.1",
+    "moment": "^2.24.0",
+    "node-sass": "^4.13.0",
     "oidc-client": "^1.9.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

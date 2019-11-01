@@ -45,11 +45,7 @@ namespace ActorsCafe
         {
             // todo 公開範囲と filterUserId を使ってフィルタする
             return posts!
-                // ユーザーに合致
-                .Include(f => f.UserId == userId)
-                // 公開投稿である
-                .Include(f => f.Visibility == Post.VISIBILITY_PUBLIC)
-                .FindAll()
+                .Find(f => f.UserId == userId && f.Visibility == Post.VISIBILITY_PUBLIC)
                 .Select(p => new PackedPost(p))
                 .OrderByDescending(f => f.CreatedAt.Ticks);
         }

@@ -4,8 +4,8 @@ using Newtonsoft.Json.Linq;
 
 namespace ActorsCafe.Endpoints
 {
-    [Route("api/notes/users")]
-    public class ApiNotesUsers : ApiController
+    [Route("api/posts/users")]
+    public class ApiPostsUsers : ApiController
     {
         public override object Handle(JObject param, string token, InternalUser? user)
         {

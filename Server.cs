@@ -19,7 +19,9 @@ namespace ActorsCafe
         }
 
         // avoid instantiate
-        private Server() { }
+        private Server() {
+            BsonMapper.Global.EmptyStringToNull = false;
+        }
 
         private static LiteDatabase? dbRef;
     }

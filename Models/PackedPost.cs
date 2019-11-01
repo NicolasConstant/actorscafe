@@ -9,7 +9,7 @@ namespace ActorsCafe
         public PackedPost? Repost { get; set; }
         public User User { get; set; }
 
-        public PackedPost(Post post)
+        public PackedPost(Post p)
         {
             if (ReplyId != null)
             {
@@ -22,7 +22,20 @@ namespace ActorsCafe
                 var repost = Server.I.PostManager.Show(RepostId);
                 Repost = repost != null ?  new PackedPost(repost) : null;
             }
-            User = Server.I.UserManager.Show(post.UserId).Pack();
+
+            Id = p.Id;
+            UserId = p.UserId;
+            Text = p.Text;
+            Cw = p.Cw;
+            Visibility = p.Visibility;
+            CreatedAt = p.CreatedAt;
+            RepostCount = p.RepostCount;
+            IsLocalOnly = p.IsLocalOnly;
+            ReplyId = p.ReplyId;
+            RepostId = p.RepostId;
+
+            
+            User = Server.I.UserManager.Show(id: p.UserId)!.Pack();
         }
     }
 }

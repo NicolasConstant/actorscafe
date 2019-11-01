@@ -2,18 +2,24 @@ import React, { useEffect, useState } from "react";
 import { postAsync } from "../../services/api";
 import { User } from "../../models/User";
 import { UserHeader } from "../../components/UserHeader";
+import { Post } from "../../models/Post";
+import { Posts } from "../../components/Posts";
 
 export type UserState = {
     user?: User;
     error: string;
+    timeline?: Post[];
 };
 
 export function UsersIndex(props: any) {
     useEffect(() => {
         (async () => {
             try {
-                const data = await postAsync<User>("/users/show", { userName });
-                setState({ error: "", user: data });
+                const user = await postAsync<User>("/users/show", { userName });
+                setState(prev => ({ ...prev, error: "", user, }));
+
+                const timeline = await postAsync<Post[]>("/posts/users", { userId: user.id });
+                setState(prev => ({ ...prev, timeline }));
             } catch(err) {
                 // エラーならエラー                
                 setState(prev => ({ ...prev, error: err.message }));
@@ -21,7 +27,7 @@ export function UsersIndex(props: any) {
         })();
     }, [props]); 
 
-    const [state, setState] = useState<UserState>({ error: "" });
+    const [state, setState] = useState<UserState>({ error: "", timeline: [], });
 
     // おそらく undefined にはならない
     const userName = props.match.params.name as string;
@@ -36,7 +42,7 @@ export function UsersIndex(props: any) {
         return (
             <div>
                 <UserHeader user={u}/>
-                <p>ここにユーザータイムラインを表示する予定</p>
+                <Posts posts={state.timeline || []} placeholder="このユーザーはまだ何も投稿していないようです。" />
             </div>
         );
     }

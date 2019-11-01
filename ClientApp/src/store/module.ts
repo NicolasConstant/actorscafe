@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 export type State = {
     token?: string,
     user?: User,
+    editorText?: string,
+    editorCw?: string,
+    editorUseCw?: boolean,
 }
 
 export const mod = createSlice({
@@ -19,6 +22,15 @@ export const mod = createSlice({
         resetToken(state) {
             state.token = undefined;
             state.user = undefined;
+        },
+        writeText(state, { payload }) {
+            state.editorText = payload;
+        },
+        writeCw(state, { payload }) {
+            state.editorCw = payload;
+        },
+        switchCw(state, { payload }) {
+            state.editorUseCw = payload;
         },
     }
 });

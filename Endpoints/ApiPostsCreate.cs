@@ -4,8 +4,8 @@ using Newtonsoft.Json.Linq;
 
 namespace ActorsCafe.Endpoints
 {
-    [Route("api/notes/create")]
-    public class ApiNotesCreate : ApiController
+    [Route("api/posts/create")]
+    public class ApiPostsCreate : ApiController
     {
         public override bool IsConfidential => true;
 
