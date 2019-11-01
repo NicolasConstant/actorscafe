@@ -16,3 +16,7 @@ code {
 label {
   display: block;
 }
+
+footer {
+  margin: 32px;
+}

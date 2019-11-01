@@ -5,11 +5,11 @@ import { signUpAsync, signInAsync } from "../services/api";
 import { AxiosError } from "axios";
 import { ApiError } from "../services/ApiError";
 
-export type WelcomeMode = "welcome" | "signup" | "signin";
+export type WelcomeMode = "signup" | "signin";
 
 export function Welcome(_: any) {
     const [ state, setState ] = useState({
-        current: "welcome" as WelcomeMode,
+        current: "signin" as WelcomeMode,
         userName: "",
         password: "",
         passwordConfirm: "",
@@ -40,25 +40,16 @@ export function Welcome(_: any) {
         }
     }
 
-    function handleBackClick() {
-        updateState({current: "welcome"});
+    function changeMode(state: WelcomeMode) {
+        updateState({current: state});
         updateState({error: ""});
     }
 
     switch (state.current) {
-        case "welcome":
-            return (
-                <div>
-                    <button onClick={() => updateState({current: "signup"})}>新規登録</button>
-                    <button onClick={() => updateState({current: "signin"})}>ログイン</button>
-                </div>
-            );
         case "signin":
             return (
                 <div>
-                    <div>
-                        <button onClick={handleBackClick}>←</button>
-                    </div>
+                    <h2>お持ちのアカウントでログイン</h2>
                     <label>
                         ユーザー名: <input type="text" value={state.userName} onChange={ev => updateState({userName: ev.target.value})} />
                     </label>
@@ -67,14 +58,13 @@ export function Welcome(_: any) {
                     </label>
                     { state.error ? <p style={{color: "red", fontWeight: "bold"}}>{state.error}</p> : null}
                     <button onClick={handleSignIn}>ログイン</button>
+                    <button onClick={() => changeMode("signup")}>アカウントを作成</button>
                 </div>
             );
         case "signup":
                 return (
                     <div>
-                        <div>
-                            <button onClick={handleBackClick}>←</button>
-                        </div>
+                        <h2>アカウントを作成</h2>
                         <label>
                             ユーザー名: <input type="text" value={state.userName} onChange={ev => updateState({userName: ev.target.value})} />
                         </label>
@@ -90,6 +80,7 @@ export function Welcome(_: any) {
                         </label>
                         { state.error ? <p style={{color: "red", fontWeight: "bold"}}>{state.error}</p> : null}
                         <button onClick={handleSignUp}>登録</button>
+                        <button onClick={() => changeMode("signin")}>お持ちのアカウントでログイン</button>
                     </div>
                 );
 
