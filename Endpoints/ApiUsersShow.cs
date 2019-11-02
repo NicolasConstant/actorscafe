@@ -7,7 +7,7 @@ namespace ActorsCafe.Endpoints
     [Route("api/users/show")]
     public class ApiUsersShow : ApiController
     {
-        public override object Handle(JObject param, string token, InternalUser? _)
+        public override object Handle(JObject param, string token, InternalUser? me)
         {
             var id = GetOptional<string>(param, "id");
             var name = GetOptional<string>(param, "userName");
@@ -22,7 +22,7 @@ namespace ActorsCafe.Endpoints
             else
                 throw new HttpErrorException(404, "specify id or name");
             
-            return user?.Pack() ?? throw new HttpErrorException(404, "No such user");
+            return user?.Pack(me) ?? throw new HttpErrorException(404, "No such user");
         }
     }
 }

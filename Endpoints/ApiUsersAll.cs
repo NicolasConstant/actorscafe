@@ -13,7 +13,7 @@ namespace ActorsCafe.Endpoints
             var offset = GetOptionalValue<int>(param, "offset") ?? 0;
             var limit = GetOptionalValue<int>(param, "limit") ?? 100;
 
-            return Users.EnumerateAll(offset, limit).Select(u => u.Pack());
+            return Users.EnumerateAll(offset, limit).Select(u => u.Pack(user));
         }
     }
 }
