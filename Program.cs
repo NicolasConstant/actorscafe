@@ -18,7 +18,6 @@ namespace ActorsCafe
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .Log
                 .UseUrls($"https://localhost:{Environment.GetEnvironmentVariable("PORT") ?? "8080"}")
                 .UseStartup<Startup>();
     }
