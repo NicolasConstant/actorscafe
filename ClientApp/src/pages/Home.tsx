@@ -59,7 +59,7 @@ export function Home(_: any) {
                         ? <input disabled={ state.disabled } size={128} type="text" placeholder="注釈があれば(オプション)" value={store.editorCw} onChange={ev => dispatch(mod.actions.writeCw(ev.target.value))}/>
                         : null
                 }
-                <textarea disabled={ state.disabled } rows={8} cols={128} value={store.editorText} onChange={ev => dispatch(mod.actions.writeText(ev.target.value))} placeholder="何を話そうか？" />
+                <textarea disabled={ state.disabled } value={store.editorText} onChange={ev => dispatch(mod.actions.writeText(ev.target.value))} placeholder="何を話そうか？" />
                 <label>
                     <input disabled={ state.disabled } type="checkbox" checked={store.editorUseCw} onChange={ev => dispatch(mod.actions.switchCw(ev.target.checked))} />
                     CW
