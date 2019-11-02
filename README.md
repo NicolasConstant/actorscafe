@@ -22,9 +22,10 @@ ActorsCafé is still in development. Several features are not yet implemented.
 - [x] Sign in
 - [x] Create a post
 - [ ] Delete a post
+- [x] Timeline
 - [ ] Repost
 - [ ] Reaction
-- [ ] Follow
+- [x] Follow
 - [ ] Block
 - [ ] Mute
 - [ ] Create a list
