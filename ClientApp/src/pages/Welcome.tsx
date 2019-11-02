@@ -14,7 +14,7 @@ export function Welcome(_: any) {
         password: "",
         passwordConfirm: "",
         error: "",
-        confirmToToS: false,
+        agreeToS: false,
         description: "",
     });
     const dispatch = useDispatch();
@@ -53,6 +53,15 @@ export function Welcome(_: any) {
         updateState({current: state});
         updateState({error: ""});
     }
+
+    function confirmSignUp() {
+        return !!(state.password && state.userName && state.password === state.passwordConfirm && state.agreeToS);
+    }
+
+    function confirmSignIn() {
+        return !!(state.userName && state.password);
+    }
+
     let form;
     switch (state.current) {
         case "signin":
@@ -66,7 +75,7 @@ export function Welcome(_: any) {
                         パスワード: <input type="password" value={state.password} onChange={ev => updateState({password: ev.target.value})} />
                     </label>
                     { state.error ? <p style={{color: "red", fontWeight: "bold"}}>{state.error}</p> : null}
-                    <button onClick={handleSignIn}>ログイン</button>
+                    <button disabled={!confirmSignIn()} onClick={handleSignIn}>ログイン</button>
                     <button onClick={() => changeMode("signup")}>アカウントを作成</button>
                 </div>;
             break;
@@ -84,11 +93,11 @@ export function Welcome(_: any) {
                         パスワード(確認): <input type="password" value={state.passwordConfirm} onChange={ev => updateState({passwordConfirm: ev.target.value})} />
                     </label>
                     <label>
-                        <input type="checkbox" checked={state.confirmToToS} onChange={ev => updateState({confirmToToS: ev.target.checked})} />
-                        <Link to="/tos">利用規約</Link>に同意する
+                        <input type="checkbox" checked={state.agreeToS} onChange={ev => updateState({agreeToS: ev.target.checked})} />
+                        <a href="/tos" target="_blank" rel="noopener noreferrer">利用規約</a>に同意する
                     </label>
                     { state.error ? <p style={{color: "red", fontWeight: "bold"}}>{state.error}</p> : null}
-                    <button onClick={handleSignUp}>登録</button>
+                    <button disabled={!confirmSignUp()} onClick={handleSignUp}>登録</button>
                     <button onClick={() => changeMode("signin")}>お持ちのアカウントでログイン</button>
                 </div>;
             break;
