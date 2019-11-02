@@ -16,8 +16,8 @@ namespace ActorsCafe.Endpoints
             var limit = GetOptionalValue<int>(param, "limit") ?? 100;
 
             IEnumerable<User> followings = Followings.GetFollowings(userId, offset, limit)
-                .Select(id => Users.Show(id))
-                .Select(u => me != null ? u?.Pack(me) : u?.Pack())
+                .Select(id => Users.Show(id: id))
+                .Select(u => u?.Pack(me))
                 .OfType<User>();
             
             return followings;

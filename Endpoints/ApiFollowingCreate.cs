@@ -14,7 +14,7 @@ namespace ActorsCafe.Endpoints
         {
             var userId = GetRequired<string>(param, "userId"); 
 
-            var followee = Users.Show(userId) ?? throw new HttpErrorException(400, "no such user");           
+            var followee = Users.Show(id: userId) ?? throw new HttpErrorException(400, "no such user");           
 
             try
             {
