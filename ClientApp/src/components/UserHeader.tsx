@@ -22,7 +22,6 @@ export function UserHeader(props: { user: User, onFollowButtonClicked?: (ev: Rea
             {
                 u.isFreezed ? <p>"このユーザーは凍結されています。</p> : 
                 <React.Fragment>
-                    { u.isFollowingMe ? <p>フォローされています</p> : null }
                     { 
                         u.isBlocked && u.isBlockingMe ? <p>相互ブロック状態です</p> :
                         u.isBlocked ? <p>ブロックしています</p> : 
