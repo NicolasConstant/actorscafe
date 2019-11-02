@@ -37,12 +37,12 @@ namespace ActorsCafe
             return collection!.Exists(f => f.followerId == follower.Id && f.followeeId == followee.Id);
         }
 
-        public IEnumerable<string> GetFollowings(string userId, int offset = 0, int limit = 100)
+        public IEnumerable<string> GetFollowings(string userId, int offset = 0, int limit = int.MaxValue)
         {
             return collection!.Find(f => f.followerId == userId, offset, limit).Select(f => f.followeeId);
         }
 
-        public IEnumerable<string> GetFollowers(string userId, int offset = 0, int limit = 100)
+        public IEnumerable<string> GetFollowers(string userId, int offset = 0, int limit = int.MaxValue)
         {
             return collection!.Find(f => f.followeeId == userId, offset, limit).Select(f => f.followerId);
         }
