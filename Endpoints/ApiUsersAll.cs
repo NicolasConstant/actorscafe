@@ -8,9 +8,12 @@ namespace ActorsCafe.Endpoints
     [Route("api/users/all")]
     public class ApiUsersAll : ApiController
     {
-        public override object Handle(JObject obj, string token, InternalUser? user)
+        public override object Handle(JObject param, string token, InternalUser? user)
         {
-            return Users.EnumerateAll().Select(u => u.Pack());
+            var offset = GetOptionalValue<int>(param, "offset") ?? 0;
+            var limit = GetOptionalValue<int>(param, "limit") ?? 100;
+
+            return Users.EnumerateAll(offset, limit).Select(u => u.Pack());
         }
     }
 }
