@@ -15,5 +15,10 @@ export interface User {
     isCat: boolean;
     isAdmin: boolean;
     isModerator: boolean;
+    isBlockingMe?: boolean;
+    isBlocked?: boolean;
+    isMuted?: boolean;
+    isFollowingMe?: boolean;
+    isFollowed?: boolean;
     host?: string;
 }

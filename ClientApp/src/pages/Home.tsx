@@ -8,21 +8,25 @@ import { Posts } from "../components/Posts";
 
 export type HomeState = {
     timeline: Post[],
+    timelineState: "fetching" | "error" | "success",
     disabled: boolean
 };
 
 export function Home(_: any) {
     const dispatch = useDispatch();
     const store = useStore();
-    const [ state, setState ] = useState<HomeState>({ timeline: [], disabled: false });
+    const [ state, setState ] = useState<HomeState>({ timeline: [], disabled: false, timelineState: "fetching" });
 
     useEffect(() => { updateTimeline(); }, [store.user!.id]);
 
     const updateTimeline = async () => {
-        const posts = await postWithTokenAsync<Post[]>("/posts/users", {
-            userId: store.user!.id,
-        })
-        setState(prev => ({ ...prev, timeline: posts, }));
+        setState(prev => ({ ...prev, timeline: [], timelineState: "fetching" }));
+        try {
+            const posts = await postWithTokenAsync<Post[]>("/my/timeline")
+            setState(prev => ({ ...prev, timeline: posts, timelineState: "success" }));
+        } catch (e) {
+            setState(prev => ({ ...prev, timelineState: "error" }));
+        }
     };
 
     const post = async () => {
@@ -38,6 +42,8 @@ export function Home(_: any) {
             await postWithTokenAsync("posts/create", content);
             await updateTimeline();
             dispatch(mod.actions.writeText(""));
+        } catch (e) {
+            window.alert(e.message || "エラー");
         } finally {
             setState(prev => ({ ...prev, disabled: false, }));
         }
@@ -62,7 +68,10 @@ export function Home(_: any) {
                 <b>{store.editorText ? 1000 - store.editorText.length : 1000}</b>
             </div>
             <article>
-                <Posts posts={state.timeline} placeholder="ユーザーをフォローしたり、あなたが投稿したりすると、ここにあなたやフォローしたユーザーの投稿が表示されます。" />
+                <button disabled={state.timelineState === "fetching"} onClick={updateTimeline}>
+                    { state.timelineState === "fetching" ? "更新中..." : "タイムラインを更新"}
+                </button>
+                <Posts posts={state.timeline} placeholder={state.timelineState === "error" ? "問題が発生しました" : state.timelineState === "fetching" ? "取得中..." : "ユーザーをフォローしたり、あなたが投稿したりすると、ここにあなたやフォローしたユーザーの投稿が表示されます。"} />
             </article>
         </div>
     );

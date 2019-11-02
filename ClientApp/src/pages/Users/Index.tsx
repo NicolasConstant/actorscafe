@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { postAsync } from "../../services/api";
+import { postAsync, postWithTokenAsync } from "../../services/api";
 import { User } from "../../models/User";
 import { UserHeader } from "../../components/UserHeader";
 import { Post } from "../../models/Post";
@@ -25,7 +25,19 @@ export function UsersIndex(props: any) {
                 setState(prev => ({ ...prev, error: err.message }));
             }
         })();
-    }, [props]); 
+    }, [props]);
+    
+    async function toggleFollow() {
+        if (!state.user) return;
+
+        // フォロー
+        await postWithTokenAsync(state.user.isFollowed ? "following/delete" : "/following/create", {
+            userId: state.user.id,
+        });
+
+        const user = await postAsync<User>("/users/show", { userName });
+        setState(prev => ({ ...prev, error: "", user, }));   
+    }
 
     const [state, setState] = useState<UserState>({ error: "", timeline: [], });
 
@@ -41,7 +53,7 @@ export function UsersIndex(props: any) {
     } else {
         return (
             <div>
-                <UserHeader user={u}/>
+                <UserHeader user={u} onFollowButtonClicked={toggleFollow}/>
                 <Posts posts={state.timeline || []} placeholder="このユーザーはまだ何も投稿していないようです。" />
             </div>
         );
