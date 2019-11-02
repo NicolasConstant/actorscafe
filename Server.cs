@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using LiteDB;
 
 namespace ActorsCafe
@@ -12,6 +13,14 @@ namespace ActorsCafe
         public static Server I { get; } = new Server();
 
         public static LiteDatabase DatabaseRef => dbRef != null ? dbRef : dbRef = new LiteDatabase("filename=./database.db;mode=Exclusive");
+
+        public string Version { get; } = "pre-alpha191102";
+        
+        public string CodeName { get; } = "Apple Pie";
+
+        public string? TermsOfService { get; } = File.Exists("./tos.md") ? File.ReadAllText("./tos.md") : null;
+
+        public string? Description { get; } = File.Exists("./description.md") ? File.ReadAllText("./description.md") : null;
 
         public void Dispose()
         {

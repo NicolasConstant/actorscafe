@@ -11,7 +11,10 @@ namespace ActorsCafe.Endpoints
         {
             return new {
                 Name = "ActorsCafé",
-                Description = "A fediverse star",
+                Version = Server.I.Version,
+                CodeName = Server.I.CodeName,
+                Description = Server.I.Description,
+                TermsOfService = Server.I.TermsOfService,
             };
         }
     }
