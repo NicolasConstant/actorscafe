@@ -10,6 +10,7 @@ import './custom.css'
 import { Notifications } from './pages/Notifications';
 import { Setting } from './pages/Setting';
 import { UserDirectory } from './pages/Users/Directory';
+import { ToS } from './pages/ToS';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -20,6 +21,7 @@ export default class App extends Component {
         <Route exact path='/' component={Index} />
         <Route exact path='/notifications' component={Notifications} />
         <Route exact path='/settings' component={Setting} />
+        <Route exact path='/tos' component={ToS} />
         <Route exact path='/directory' component={UserDirectory} />
         <Route exact path='/@:name' component={UsersIndex} />
         <Route exact path='/@:name/following' component={UsersFollowing} />

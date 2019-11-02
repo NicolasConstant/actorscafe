@@ -1,10 +1,22 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useStore } from '../store/module';
 import { Link } from 'react-router-dom';
+import { getMetaAsync } from '../services/api';
 
 export function Layout (props: any) {
   const store = useStore();
-  return (
+  const [ state, setState ] = useState({
+    version: ""
+  });
+
+  useEffect(() => {
+    (async () => {
+      const meta = (await getMetaAsync());
+      setState(p => ({ ...p, version: `${meta.version} (${meta.codeName})` }));
+    })();
+}, [null]);
+
+return (
     <div>
       <header>
         <h1>ActorsCafé</h1>
@@ -18,6 +30,7 @@ export function Layout (props: any) {
             </Fragment>
           ) : null}
           <Link to="/directory">ディレクトリ</Link>
+          <Link to="/tos">利用規約</Link>
         </div>
         <hr />
       </header>
@@ -25,7 +38,7 @@ export function Layout (props: any) {
         {props.children}
       </main>
       <footer>
-        Powered by <a href="https://github.com/xeltica/actorscafe">ActorsCafé</a>
+        Powered by <a href="https://github.com/xeltica/actorscafe">ActorsCafé</a> { state.version }
       </footer>
     </div>
   );

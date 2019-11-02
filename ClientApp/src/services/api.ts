@@ -4,6 +4,7 @@ import { ApiError } from "./ApiError";
 import { string } from "prop-types";
 import { mod } from "../store/module";
 import { store } from "../store/store-api";
+import { Meta } from "../models/Meta";
 
 export const apiUrl = `https://${window.location.host}/api`;
 
@@ -32,6 +33,8 @@ export const postAsync = async <T = any>(endPoint: string, content: any = {}) =>
         throw new ApiError(res.data.message);
     }
 };
+
+export const getMetaAsync = async () => postAsync<Meta>("meta", {});
 
 export const postWithTokenAsync = postAsync;
 
