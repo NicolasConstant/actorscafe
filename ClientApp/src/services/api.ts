@@ -15,8 +15,12 @@ export const apiClient = Axios.create({
 });
 
 export const postAsync = async <T = any>(endPoint: string, content: any = {}) => {
-    const res = await apiClient.post(endPoint, content);
+    const token = store.getState().token;
 
+    if (token) content.token = token;
+
+    const res = await apiClient.post(endPoint, content);
+    
     if (res.status < 400) {
         // エラーがなければデータを返す
         return res.data as T;
@@ -29,7 +33,7 @@ export const postAsync = async <T = any>(endPoint: string, content: any = {}) =>
     }
 };
 
-export const postWithTokenAsync = <T = any>(endPoint: string, content: any = {}) => postAsync(endPoint, { ...content, token: store.getState().token });
+export const postWithTokenAsync = postAsync;
 
 export const signInAsync = (userName: string, password: string) => postAsync<SignInResponse>("signin", { userName, password });
 export const signUpAsync = (userName: string, password: string) => postAsync<SignInResponse>("signup", { userName, password });
