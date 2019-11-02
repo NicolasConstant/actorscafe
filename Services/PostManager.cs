@@ -38,11 +38,11 @@ namespace ActorsCafe
             return collection?.FindById(id);
         }
 
-        public IEnumerable<PackedPost> GetAllBy(string userId, string? filterUserId)
+        public IEnumerable<PackedPost> GetAllBy(string userId, string? filterUserId = null, int offset = 0, int limit = 100)
         {
             // todo 公開範囲と filterUserId を使ってフィルタする
             return collection!
-                .Find(f => f.UserId == userId && f.Visibility == Post.VISIBILITY_PUBLIC)
+                .Find(f => f.UserId == userId && f.Visibility == Post.VISIBILITY_PUBLIC, offset, limit)
                 .Select(p => new PackedPost(p))
                 .OrderByDescending(f => f.CreatedAt.Ticks);
         }
