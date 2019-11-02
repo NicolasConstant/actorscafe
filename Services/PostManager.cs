@@ -6,12 +6,9 @@ using LiteDB;
 
 namespace ActorsCafe
 {
-    public class PostManager
+    public class PostManager : ManagerBase<Post>
     {
-        public PostManager()
-        {
-            (db, posts) = GetRepository();
-        }
+        public override string CollectionName => "collection";
 
         public Post CreateNew(string? text, string? cw, string visibility, bool isLocalOnly, string userId, string? repostId = null, string? replyId = null)
         {
@@ -27,38 +24,27 @@ namespace ActorsCafe
                 IsLocalOnly = isLocalOnly,
                 UserId = userId,
             };
-            posts!.Insert(p);
+            collection!.Insert(p);
             return p;
         }
 
         public void Delete(string noteId)
         {
-            posts!.Delete(noteId);
+            collection!.Delete(noteId);
         }
 
         public Post? Show(string id)
         {
-            return posts?.FindById(id);
+            return collection?.FindById(id);
         }
 
         public IEnumerable<PackedPost> GetAllBy(string userId, string? filterUserId)
         {
             // todo 公開範囲と filterUserId を使ってフィルタする
-            return posts!
+            return collection!
                 .Find(f => f.UserId == userId && f.Visibility == Post.VISIBILITY_PUBLIC)
                 .Select(p => new PackedPost(p))
                 .OrderByDescending(f => f.CreatedAt.Ticks);
         }
-
-        private (LiteDatabase, LiteCollection<Post>) GetRepository()
-        {
-            var db = Server.DatabaseRef;
-            var c = db.GetCollection<Post>("posts");
-            c.EnsureIndex(p => p.Id, true);
-            return (db, c);
-        }
-
-        private LiteDatabase? db;
-        private LiteCollection<Post>? posts;
     }
 }

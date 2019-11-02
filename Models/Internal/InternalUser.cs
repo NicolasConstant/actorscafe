@@ -5,15 +5,13 @@ namespace ActorsCafe.Internal
     /// <summary>
     /// ユーザーを定義します。
     /// </summary>
-    public class InternalUser : User
+    public class InternalUser : User, IEntity
     {
         public string Password { get; set; } = "";
 
         public string Token { get; set; } = "";
 
-        public List<string> Followings { get; set; } = new List<string>();
-
-        public User Pack()
+        public User Pack(InternalUser? me = null)
         {
             return new User
             {
@@ -34,6 +32,11 @@ namespace ActorsCafe.Internal
                 IsAdmin = IsAdmin,
                 IsModerator = IsModerator,
                 Host = Host,
+                IsBlocked = false,
+                IsBlockingMe = false,
+                IsMuted = false,
+                IsFollowed = me != null ? Server.I.FollowingManager.IsFollowing(me, this) : false,
+                IsFollowingMe = me != null ? Server.I.FollowingManager.IsFollowing(this, me) : false,
             };
         }
     }

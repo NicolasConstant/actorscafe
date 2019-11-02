@@ -10,6 +10,8 @@ namespace ActorsCafe
 
         public PostManager PostManager { get; } = new PostManager();
 
+        public FollowingManager FollowingManager { get; } = new FollowingManager();
+
         public static Server I { get; } = new Server();
 
         public static LiteDatabase DatabaseRef => dbRef != null ? dbRef : dbRef = new LiteDatabase("filename=./database.db;mode=Exclusive");

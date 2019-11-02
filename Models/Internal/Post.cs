@@ -2,7 +2,7 @@ using System;
 
 namespace ActorsCafe
 {
-    public class Post
+    public class Post : IEntity
     {
         public const string VISIBILITY_PUBLIC = "public";
         public const string VISIBILITY_FOLLOWERS = "followers";

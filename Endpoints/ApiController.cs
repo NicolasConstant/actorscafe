@@ -14,6 +14,8 @@ namespace ActorsCafe.Endpoints
 
         public PostManager Posts => Server.I.PostManager;
 
+        public FollowingManager Followings => Server.I.FollowingManager;
+
         public virtual bool IsConfidential => false;
 
         [HttpPost]

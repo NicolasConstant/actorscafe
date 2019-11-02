@@ -6,16 +6,13 @@ using LiteDB;
 
 namespace ActorsCafe
 {
-    public class UserManager
+    public class UserManager : ManagerBase<InternalUser>
     {
-        public UserManager()
-        {
-            (db, users) = GetRepository();
-        }
+        public override string CollectionName => "users";
 
         public InternalUser CreateNewUser(string name, string hash)
         {
-            if (users!.Exists(f => f.Name.ToLowerInvariant() == name.ToLowerInvariant()))
+            if (collection!.Exists(f => f.Name.ToLowerInvariant() == name.ToLowerInvariant()))
                 throw new ArgumentException("already exists");
             if (!name.IsValidUserName()) {
                 throw new ArgumentException("invalid user name");
@@ -30,19 +27,31 @@ namespace ActorsCafe
                 Password = hash,
                 Token = UniqueId.Generate(),
             };
-            users!.Insert(u);
+            collection!.Insert(u);
             return u;
+        }
+
+        public void IncrementFollowingsCount(InternalUser me, int amount = 1)
+        {
+            me.FollowingsCount += amount;
+            collection!.Update(me);
+        }
+
+        public void IncrementFollowersCount(InternalUser me, int amount = 1)
+        {
+            me.FollowersCount += amount;
+            collection!.Update(me);
         }
 
         public InternalUser? Show(string? id = null, string? name = null, string? host = null)
         {
             if (id != null)
             {
-                return users!.FindById(id);
+                return collection!.FindById(id);
             }
             else if (name != null)
             {
-                return users!.FindOne(u => u.Name.ToLowerInvariant() == name.ToLowerInvariant() && (u.Host ?? "").ToLowerInvariant() == (host ?? "").ToLowerInvariant());
+                return collection!.FindOne(u => u.Name.ToLowerInvariant() == name.ToLowerInvariant() && (u.Host ?? "").ToLowerInvariant() == (host ?? "").ToLowerInvariant());
             }
             else
             {
@@ -52,23 +61,12 @@ namespace ActorsCafe
 
         public InternalUser Show(string token)
         {
-            return users!.FindOne(u => u.Token == token);
+            return collection!.FindOne(u => u.Token == token);
         }
 
-        public IEnumerable<InternalUser> EnumerateAll()
+        public IEnumerable<InternalUser> EnumerateAll(int offset = 0, int limit = 100)
         {
-            return users!.FindAll();
+            return collection!.Find(u => true, offset, limit);
         }
-
-        private (LiteDatabase, LiteCollection<InternalUser>) GetRepository()
-        {
-            var db = Server.DatabaseRef;
-            var c = db.GetCollection<InternalUser>("users");
-            c.EnsureIndex(u => u.Id, true);
-            return (db, c);
-        }
-
-        private LiteDatabase? db;
-        private LiteCollection<InternalUser>? users;
     }
 }
