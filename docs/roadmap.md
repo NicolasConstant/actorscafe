@@ -41,7 +41,7 @@
     - @Mention
     - #Hashtag 
 
-## alpha.2
+## alpha.3
 
 - [ ] Block a user
 - [ ] Mute a user
