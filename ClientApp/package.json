@@ -1,6 +1,6 @@
 {
   "name": "actorscafe",
-  "version": "pre-alpha.1",
+  "version": "0.0.0-alpha.1",
   "codename": "Apple Pie",
   "private": true,
   "dependencies": {
