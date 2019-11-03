@@ -14,31 +14,11 @@ You can post your opinions, repost other users' one, and react them by using Emo
 [See more features information...](docs/features.md)
 
 
-### Progress
+### Roadmap
 
-ActorsCafé is still in development. Several features are not yet implemented.
+ActorsCafé is still in development.
 
-- [x] Create your account
-- [x] Sign in
-- [x] Create a post
-- [ ] Delete a post
-- [x] Timeline
-- [ ] Repost
-- [ ] Reaction
-- [x] Follow
-- [ ] Block
-- [ ] Mute
-- [ ] Create a list
-- [ ] Federation (Implement ActivityPub)
-- Import
-  - [ ] Follow
-  - [ ] Block
-  - [ ] Mute
-  - [ ] List
-- [ ] Integrate with recommendation engine
-- [ ] Change your profile
-- [ ] Delete your account
-- [ ] Admin Console
+See [here](docs/roadmap.md) to check roadmap.
 
 ## Build
 
