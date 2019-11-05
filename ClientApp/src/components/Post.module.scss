@@ -1,0 +1,34 @@
+.AcPost {
+    padding: 16px;
+    margin: 8px;
+
+    background: var(--card-back);
+
+    header {
+        display: flex;
+        .name {
+            margin-right: 8px;
+            font-weight: 500;
+        }
+
+        .acct {
+            color: #78909C;
+        }
+
+        .time {
+            margin-left: auto;
+            color: #78909C;
+        }
+    }
+
+    main {
+        font-size: 18px;
+        padding-left: 12px;
+    }
+
+    .cwButton {
+        border: none;
+        background: #78909C;
+        cursor: pointer;
+    }
+}

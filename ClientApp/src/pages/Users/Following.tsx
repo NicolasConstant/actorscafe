@@ -20,13 +20,13 @@ export function UsersFollowing(props: any) {
 
                 const users = await postAsync<User[]>("/users/followings", { userId: user.id });
                 setState({ error: "", user, users });
-            } catch(err) {
+            } catch (err) {
                 // エラーならエラー                
                 setState(prev => ({ ...prev, error: err.message }));
             }
         })();
-    }, [props]); 
-    
+    }, [props]);
+
     async function toggleFollow() {
         if (!state.user) return;
 
@@ -36,7 +36,7 @@ export function UsersFollowing(props: any) {
         });
 
         const user = await postAsync<User>("/users/show", { userName });
-        setState(prev => ({ ...prev, error: "", user, }));   
+        setState(prev => ({ ...prev, error: "", user, }));
     }
 
     const [state, setState] = useState<FollowingState>({ error: "" });
@@ -53,21 +53,20 @@ export function UsersFollowing(props: any) {
     } else {
         return (
             <div>
-                <UserHeader user={u} onFollowButtonClicked={toggleFollow}/>                
-                <h2>フォロー</h2>
+                <UserHeader user={u} onFollowButtonClicked={toggleFollow} />
                 {
                     state.error ? <p>{state.error}</p> :
-                    !state.users ? <p>取得中</p> :
-                    <ul>
-                        {
-                            state.users.length > 0 ?
-                                state.users.map(u => 
-                                    <li key={u.id}>
-                                        <Link to={`/${toAcctString(u)}`}><b>{u.profileName || u.name}</b> {toAcctString(u)}</Link>
-                                    </li>
-                                ) : "いない"
-                        }
-                    </ul>
+                        !state.users ? <p>取得中</p> :
+                            <ul>
+                                {
+                                    state.users.length > 0 ?
+                                        state.users.map(u =>
+                                            <li key={u.id}>
+                                                <Link to={`/${toAcctString(u)}`}><b>{u.profileName || u.name}</b> {toAcctString(u)}</Link>
+                                            </li>
+                                        ) : "いない"
+                                }
+                            </ul>
                 }
             </div>
         );

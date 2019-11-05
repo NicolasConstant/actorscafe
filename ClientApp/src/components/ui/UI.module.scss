@@ -1,0 +1,76 @@
+.button, .link {
+    display: flex;
+    border: none;
+    padding: 8px 16px;
+    margin: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.button {
+    background: var(--accent);
+    color: var(--accent-fore);
+    font-weight: bold;
+
+    &:disabled {
+        color: #9E9E9E;
+        background: #757575;
+    }
+}
+
+.link {
+    background: none;
+    border: none;
+    color: var(--accent);
+    text-decoration: underline;
+
+    &:disabled {
+        color: #757575;
+        text-decoration: none;
+    }
+}
+
+.textarea {
+    padding: 16px;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 96px;
+
+    background: transparent;
+    color: var(--fore);
+    border: 1px solid #757575;
+    outline: none;
+    transition: border-color 0.2s ease;
+    font-size: 16px;
+    margin-top: 24px;
+
+    &:focus {
+        border-color: var(--accent);
+    }
+
+    &::placeholder {
+        color: var(--fore);
+    }
+}
+
+.textInput {
+    padding: 4px 16px;
+    background: transparent;
+    color: var(--fore);
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757575;
+    outline: none;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    margin-top: 24px;
+
+    &:focus {
+        border-color: var(--accent);
+    }
+
+    &::placeholder {
+        color: var(--fore);
+    }
+}

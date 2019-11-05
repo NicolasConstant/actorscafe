@@ -1,0 +1,17 @@
+.postForm {
+    background: var(--card-back);
+    padding: 8px;
+
+    .command {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .right {
+            display: flex;
+            margin-left: auto;
+            align-items: center;
+            flex-direction: row;
+        }
+    }
+}

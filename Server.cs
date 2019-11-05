@@ -16,8 +16,8 @@ namespace ActorsCafe
 
         public static LiteDatabase DatabaseRef => dbRef != null ? dbRef : dbRef = new LiteDatabase("filename=./database.db;mode=Exclusive");
 
-        public string Version { get; } = "pre-alpha.1";
-        
+        public string Version { get; } = "alpha.1";
+
         public string CodeName { get; } = "Apple Pie";
 
         public string? TermsOfService { get; } = File.Exists("./tos.md") ? File.ReadAllText("./tos.md") : null;
@@ -30,7 +30,8 @@ namespace ActorsCafe
         }
 
         // avoid instantiate
-        private Server() {
+        private Server()
+        {
             BsonMapper.Global.EmptyStringToNull = false;
         }
 

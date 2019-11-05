@@ -4,11 +4,12 @@ import { useDispatch } from "react-redux";
 import { signUpAsync, signInAsync, getMetaAsync } from "../services/api";
 import { Link } from "react-router-dom";
 import marked from "marked";
+import { UIButton } from "../components/ui/UIButton";
 
 export type WelcomeMode = "signup" | "signin";
 
 export function Welcome(_: any) {
-    const [ state, setState ] = useState({
+    const [state, setState] = useState({
         current: "signin" as WelcomeMode,
         userName: "",
         password: "",
@@ -19,7 +20,7 @@ export function Welcome(_: any) {
     });
     const dispatch = useDispatch();
 
-    const updateState = (obj: any) => setState(prev=> ({...prev, ...obj}));
+    const updateState = (obj: any) => setState(prev => ({ ...prev, ...obj }));
 
     useEffect(() => {
         (async () => {
@@ -34,7 +35,7 @@ export function Welcome(_: any) {
             const res = (await signUpAsync(state.userName, state.password));
             dispatch(mod.actions.setToken(res));
         } catch (err) {
-            updateState({error: err.message});
+            updateState({ error: err.message });
             return;
         }
     }
@@ -44,14 +45,14 @@ export function Welcome(_: any) {
             const res = (await signInAsync(state.userName, state.password));
             dispatch(mod.actions.setToken(res));
         } catch (err) {
-            updateState({error: err.message});
+            updateState({ error: err.message });
             return;
         }
     }
 
     function changeMode(state: WelcomeMode) {
-        updateState({current: state});
-        updateState({error: ""});
+        updateState({ current: state });
+        updateState({ error: "" });
     }
 
     function confirmSignUp() {
@@ -65,40 +66,40 @@ export function Welcome(_: any) {
     let form;
     switch (state.current) {
         case "signin":
-            form = 
+            form =
                 <div>
                     <h3>お持ちのアカウントでログイン</h3>
                     <label>
-                        ユーザー名: <input type="text" value={state.userName} onChange={ev => updateState({userName: ev.target.value})} />
+                        ユーザー名: <input type="text" value={state.userName} onChange={ev => updateState({ userName: ev.target.value })} />
                     </label>
                     <label>
-                        パスワード: <input type="password" value={state.password} onChange={ev => updateState({password: ev.target.value})} />
+                        パスワード: <input type="password" value={state.password} onChange={ev => updateState({ password: ev.target.value })} />
                     </label>
-                    { state.error ? <p style={{color: "red", fontWeight: "bold"}}>{state.error}</p> : null}
-                    <button disabled={!confirmSignIn()} onClick={handleSignIn}>ログイン</button>
-                    <button onClick={() => changeMode("signup")}>アカウントを作成</button>
+                    {state.error ? <p style={{ color: "red", fontWeight: "bold" }}>{state.error}</p> : null}
+                    <UIButton inline={true} disabled={!confirmSignIn()} onClick={handleSignIn}>ログイン</UIButton>
+                    <UIButton inline={true} link={true} onClick={() => changeMode("signup")}>アカウントを作成</UIButton>
                 </div>;
             break;
         case "signup":
-            form = 
+            form =
                 <div>
                     <h3>アカウントを作成</h3>
                     <label>
-                        ユーザー名: <input type="text" value={state.userName} onChange={ev => updateState({userName: ev.target.value})} />
+                        ユーザー名: <input type="text" value={state.userName} onChange={ev => updateState({ userName: ev.target.value })} />
                     </label>
                     <label>
-                        パスワード: <input type="password" value={state.password} onChange={ev => updateState({password: ev.target.value})} />
+                        パスワード: <input type="password" value={state.password} onChange={ev => updateState({ password: ev.target.value })} />
                     </label>
                     <label>
-                        パスワード(確認): <input type="password" value={state.passwordConfirm} onChange={ev => updateState({passwordConfirm: ev.target.value})} />
+                        パスワード(確認): <input type="password" value={state.passwordConfirm} onChange={ev => updateState({ passwordConfirm: ev.target.value })} />
                     </label>
                     <label>
-                        <input type="checkbox" checked={state.agreeToS} onChange={ev => updateState({agreeToS: ev.target.checked})} />
+                        <input type="checkbox" checked={state.agreeToS} onChange={ev => updateState({ agreeToS: ev.target.checked })} />
                         <a href="/tos" target="_blank" rel="noopener noreferrer">利用規約</a>に同意する
                     </label>
-                    { state.error ? <p style={{color: "red", fontWeight: "bold"}}>{state.error}</p> : null}
-                    <button disabled={!confirmSignUp()} onClick={handleSignUp}>登録</button>
-                    <button onClick={() => changeMode("signin")}>お持ちのアカウントでログイン</button>
+                    {state.error ? <p style={{ color: "red", fontWeight: "bold" }}>{state.error}</p> : null}
+                    <UIButton inline={true} disabled={!confirmSignUp()} onClick={handleSignUp}>登録</UIButton>
+                    <UIButton inline={true} link={true} onClick={() => changeMode("signin")}>お持ちのアカウントでログイン</UIButton>
                 </div>;
             break;
         default:
@@ -109,7 +110,7 @@ export function Welcome(_: any) {
     }
     return (
         <div>
-            <div dangerouslySetInnerHTML={{__html: marked(state.description)}} />
+            <div dangerouslySetInnerHTML={{ __html: marked(state.description) }} />
             {form}
         </div>
     );
