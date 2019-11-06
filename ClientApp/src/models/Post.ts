@@ -1,11 +1,12 @@
 import { User } from "./User";
+import { Visibility } from "./Visibility";
 
 export interface Post {
     id: string;
     userId: string;
     text?: string;
     cw?: string;
-    visibility: "public" | "followers" | "direct";
+    visibility: Visibility;
     createdAt: Date;
     repostCount: number;
     isLocalOnly: boolean;
