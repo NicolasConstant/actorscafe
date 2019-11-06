@@ -6,6 +6,7 @@
 
     header {
         display: flex;
+        font-size: 18px;
         .name {
             margin-right: 8px;
             font-weight: 500;
@@ -29,6 +30,7 @@
     .cwButton {
         border: none;
         background: #78909C;
+        margin: 8px;
         cursor: pointer;
     }
 }

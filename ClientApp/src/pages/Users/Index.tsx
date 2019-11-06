@@ -4,6 +4,7 @@ import { User } from "../../models/User";
 import { UserHeader } from "../../components/UserHeader";
 import { Post } from "../../models/Post";
 import { Posts } from "../../components/Posts";
+import { Container } from "../../components/Container";
 
 export type UserState = {
     user?: User;
@@ -20,13 +21,13 @@ export function UsersIndex(props: any) {
 
                 const timeline = await postAsync<Post[]>("/posts/users", { userId: user.id });
                 setState(prev => ({ ...prev, timeline }));
-            } catch(err) {
+            } catch (err) {
                 // エラーならエラー                
                 setState(prev => ({ ...prev, error: err.message }));
             }
         })();
     }, [props]);
-    
+
     async function toggleFollow() {
         if (!state.user) return;
 
@@ -36,7 +37,7 @@ export function UsersIndex(props: any) {
         });
 
         const user = await postAsync<User>("/users/show", { userName });
-        setState(prev => ({ ...prev, error: "", user, }));   
+        setState(prev => ({ ...prev, error: "", user, }));
     }
 
     const [state, setState] = useState<UserState>({ error: "", timeline: [], });
@@ -52,10 +53,10 @@ export function UsersIndex(props: any) {
         return <p>取得中</p>
     } else {
         return (
-            <div>
-                <UserHeader user={u} onFollowButtonClicked={toggleFollow}/>
+            <Container>
+                <UserHeader user={u} onFollowButtonClicked={toggleFollow} />
                 <Posts posts={state.timeline || []} placeholder="このユーザーはまだ何も投稿していないようです。" />
-            </div>
+            </Container>
         );
     }
 }

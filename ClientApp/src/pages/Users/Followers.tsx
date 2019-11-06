@@ -6,6 +6,7 @@ import { UserState } from "./Index";
 import { FollowingState } from "./Following";
 import { toAcctString } from "../../helpers/toAcctString";
 import { Link } from "react-router-dom";
+import { Container } from "../../components/Container";
 
 export function UsersFollowers(props: any) {
     useEffect(() => {
@@ -15,13 +16,13 @@ export function UsersFollowers(props: any) {
                 const users = await postAsync<User[]>("/users/followers", { userId: user.id });
 
                 setState({ error: "", user, users });
-            } catch(err) {
+            } catch (err) {
                 // エラーならエラー                
                 setState(prev => ({ ...prev, error: err.message }));
             }
         })();
-    }, [props]); 
-    
+    }, [props]);
+
     async function toggleFollow() {
         if (!state.user) return;
 
@@ -31,7 +32,7 @@ export function UsersFollowers(props: any) {
         });
 
         const user = await postAsync<User>("/users/show", { userName });
-        setState(prev => ({ ...prev, error: "", user, }));   
+        setState(prev => ({ ...prev, error: "", user, }));
     }
 
     const [state, setState] = useState<FollowingState>({ error: "" });
@@ -47,24 +48,24 @@ export function UsersFollowers(props: any) {
         return <p>取得中</p>
     } else {
         return (
-            <div>
-                <UserHeader user={u} onFollowButtonClicked={toggleFollow}/>
+            <Container>
+                <UserHeader user={u} onFollowButtonClicked={toggleFollow} />
                 <h2>フォロワー</h2>
                 {
                     state.error ? <p>{state.error}</p> :
-                    !state.users ? <p>取得中</p> :
-                    <ul>
-                        {
-                            state.users.length > 0 ?
-                                state.users.map(u => 
-                                    <li key={u.id}>
-                                        <Link to={`/${toAcctString(u)}`}><b>{u.profileName || u.name}</b> {toAcctString(u)}</Link>
-                                    </li>
-                                ) : "いない"
-                        }
-                    </ul>
+                        !state.users ? <p>取得中</p> :
+                            <ul>
+                                {
+                                    state.users.length > 0 ?
+                                        state.users.map(u =>
+                                            <li key={u.id}>
+                                                <Link to={`/${toAcctString(u)}`}><b>{u.profileName || u.name}</b> {toAcctString(u)}</Link>
+                                            </li>
+                                        ) : "いない"
+                                }
+                            </ul>
                 }
-            </div>
+            </Container>
         );
     }
 }

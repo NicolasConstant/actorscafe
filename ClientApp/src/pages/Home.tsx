@@ -9,6 +9,7 @@ import { UITextarea } from "../components/ui/UITextarea";
 import { UITextInput } from "../components/ui/UITextInput";
 import css from "./Home.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Container } from "../components/Container";
 
 export type HomeState = {
     timeline: Post[],
@@ -54,7 +55,7 @@ export function Home(_: any) {
 
 
     return (
-        <div>
+        <Container>
             <div className={css.postForm}>
                 {
                     store.editorUseCw
@@ -68,19 +69,16 @@ export function Home(_: any) {
                     </UIButton>
                     <div className={css.right}>
                         {store.editorText ? 1000 - store.editorText.length : 1000}&emsp;
-                        <UIButton disabled={state.disabled || !store.editorText || store.editorText.length < 1 || store.editorText.length > 1000} onClick={post}>
+                            <UIButton disabled={state.disabled || !store.editorText || store.editorText.length < 1 || store.editorText.length > 1000} onClick={post}>
                             <FontAwesomeIcon icon="paper-plane" /> &ensp;
-                            {state.disabled ? "投稿中..." : "投稿する"}
+                                {state.disabled ? "投稿中..." : "投稿する"}
                         </UIButton>
                     </div>
                 </div>
             </div>
             <article>
-                <UIButton disabled={state.timelineState === "fetching"} onClick={updateTimeline}>
-                    {state.timelineState === "fetching" ? "更新中..." : "タイムラインを更新"}
-                </UIButton>
                 <Posts posts={state.timeline} placeholder={state.timelineState === "error" ? "問題が発生しました" : state.timelineState === "fetching" ? "取得中..." : "ユーザーをフォローしたり、あなたが投稿したりすると、ここにあなたやフォローしたユーザーの投稿が表示されます。"} />
             </article>
-        </div>
+        </Container>
     );
 }

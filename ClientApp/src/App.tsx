@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Route } from "react-router";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faRetweet, faHeart, faSmile, faPlus, faMinus, faEllipsisH, faBell, faAddressBook, faReply, faReplyAll, faGlobe, faLock, faEnvelope, faCog, faSignOutAlt, faEye, faEyeSlash, faHome, faCoffee, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 import { Layout } from "./pages/Layout";
 import { Index } from "./pages/Index";
@@ -12,31 +10,7 @@ import { Notifications } from "./pages/Notifications";
 import { Setting } from "./pages/Setting";
 import { UserDirectory } from "./pages/Users/Directory";
 import { ToS } from "./pages/ToS";
-
 import "sanitize.css";
-
-library.add(
-  faRetweet,
-  faHeart,
-  faSmile,
-  faPlus,
-  faMinus,
-  faEllipsisH,
-  faBell,
-  faAddressBook,
-  faReply,
-  faReplyAll,
-  faGlobe,
-  faLock,
-  faEnvelope,
-  faCog,
-  faSignOutAlt,
-  faEye,
-  faEyeSlash,
-  faHome,
-  faCoffee,
-  faPaperPlane,
-);
 
 export default class App extends Component {
   static displayName = App.name;

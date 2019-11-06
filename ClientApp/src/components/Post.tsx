@@ -25,17 +25,19 @@ export function Post(props: { post: ACPost }) {
                 <div className={css.time}>{moment(p.createdAt).fromNow()}</div>
             </header>
             <main>
-                <p>
-                    {
-                        p.cw !== null ? (<span>
-                            {p.cw}
-                            <button className={css.cwButton} onClick={() => setState(prev => ({ cwOpened: !prev.cwOpened }))}>
-                                {state.cwOpened ? "隠す" : "見る"}
-                            </button>
+                {
+                    p.cw !== null ? (
+                        <div>
+                            <div>
+                                {p.cw}
+                                <button className={css.cwButton} onClick={() => setState(prev => ({ cwOpened: !prev.cwOpened }))}>
+                                    {state.cwOpened ? "隠す" : "見る"}
+                                </button>
+                            </div>
                             {state.cwOpened ? p.text : null}
-                        </span>) : p.text
-                    }
-                </p>
+                        </div>
+                    ) : <div>{p.text}</div>
+                }
             </main>
         </article>
     );

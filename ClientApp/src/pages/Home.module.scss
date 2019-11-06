@@ -1,6 +1,12 @@
 .postForm {
+    position: sticky;
     background: var(--card-back);
+    top: 64px;
+    left: 0;
+    right: 0;
     padding: 8px;
+    box-shadow: 0 0 16px black;
+    margin: 0 8px;
 
     .command {
         display: flex;

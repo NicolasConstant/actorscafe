@@ -5,6 +5,7 @@ import { UserHeader } from "../../components/UserHeader";
 import { UserState } from "./Index";
 import { toAcctString } from "../../helpers/toAcctString";
 import { Link } from "react-router-dom";
+import { Container } from "../../components/Container";
 
 export type FollowingState = {
     user?: User;
@@ -52,7 +53,7 @@ export function UsersFollowing(props: any) {
         return <p>取得中</p>
     } else {
         return (
-            <div>
+            <Container>
                 <UserHeader user={u} onFollowButtonClicked={toggleFollow} />
                 {
                     state.error ? <p>{state.error}</p> :
@@ -68,7 +69,7 @@ export function UsersFollowing(props: any) {
                                 }
                             </ul>
                 }
-            </div>
+            </Container>
         );
     }
 }

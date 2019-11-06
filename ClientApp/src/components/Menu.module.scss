@@ -6,7 +6,6 @@
     right: 0;
     height: 64px;
     background: var(--accent);
-    box-shadow: 0 0 16px black;
     padding: 0 16px;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -14,16 +13,18 @@
     align-items: center;
 
     a {
-        color: #263238;
+        color: var(--accent-fore);
         text-decoration: none;
     }
 
     .menuItem, .menuItemActive {
         display: flex;
+        position: relative;
         padding: 0 16px;
         justify-content: center;
         align-items: center;
         user-select: none;
+        cursor: pointer;
         &:hover {
             background: var(--accent-light);
         }
@@ -31,6 +32,59 @@
 
         .title {
             margin-left: 8px;
+        }
+        $subMenuTransitionTime: 0.15s;
+
+        .subMenu {
+            position: absolute;
+            cursor: default;
+            right: 0;
+            width: 256px;
+            top: 100%;
+            background: var(--card-back);
+            box-shadow: 0 0 8px black;
+            color: var(--fore);
+            ul {
+                margin: 0;
+                padding: 0;
+                li {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 8px 16px;
+                    list-style: none;
+                    &:not(.disabled):hover {
+                        background: var(--accent);
+                        color: var(--accent-fore);
+                    }
+                    &.disabled {
+                        color: #999;
+                        cursor: default;
+                    }
+                }
+                &:not(:last-child) {
+                    border-bottom: 1px solid var(--back);
+                    padding-bottom: 8px;
+                    margin-bottom: 8px;
+                }
+            }
+        }
+        .subMenuEnter {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        .subMenuEnterActive {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity $subMenuTransitionTime, transform $subMenuTransitionTime;
+        }
+        .subMenuExit {
+            opacity: 1;
+        }
+        .subMenuExitActive {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity $subMenuTransitionTime, transform $subMenuTransitionTime;
         }
     }
 
@@ -50,6 +104,12 @@
         z-index: -1;
         text-align: center;
         color: var(--accent-fore);
+    }
+
+    .right {
+        margin-left: auto;
+        display: flex;
+        height: 100%;
     }
     @media screen and (max-width: 900px) { 
         .menuItem, .menuItemActive {

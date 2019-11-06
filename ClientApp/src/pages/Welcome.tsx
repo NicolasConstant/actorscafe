@@ -5,6 +5,7 @@ import { signUpAsync, signInAsync, getMetaAsync } from "../services/api";
 import { Link } from "react-router-dom";
 import marked from "marked";
 import { UIButton } from "../components/ui/UIButton";
+import { Container } from "../components/Container";
 
 export type WelcomeMode = "signup" | "signin";
 
@@ -109,9 +110,9 @@ export function Welcome(_: any) {
             break;
     }
     return (
-        <div>
+        <Container>
             <div dangerouslySetInnerHTML={{ __html: marked(state.description) }} />
             {form}
-        </div>
+        </Container>
     );
 }
