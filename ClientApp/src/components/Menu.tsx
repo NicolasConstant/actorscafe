@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { User } from "../models/User";
-import css from "./Menu.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { CSSTransition } from "react-transition-group";
+
+import { User } from "../models/User";
+import css from "./Menu.module.scss";
+import { Dropdown, SubMenuItem } from "./Dropdown";
 
 function MenuItem(props: { to: string, text?: string, icon?: IconProp }) {
     const isActive = useLocation().pathname === props.to;
@@ -16,50 +17,17 @@ function MenuItem(props: { to: string, text?: string, icon?: IconProp }) {
     );
 }
 
-function MenuItemWithSubMenu(props: { text?: string, icon?: IconProp, subMenuItems?: SubMenuItem[][] }) {
+function MenuItemWithSubMenu(props: { text?: string, icon?: IconProp, subMenuItems: SubMenuItem[][], align?: "left" | "right" }) {
     const [isActive, setIsActive] = useState(false);
     return (
         <a className={css.menuItem} onClick={() => setIsActive(!isActive)}>
-            {props.icon ? <FontAwesomeIcon icon={props.icon} fixedWidth={true} /> : null}
+            {props.icon ? <FontAwesomeIcon icon={props.icon} size="2x" fixedWidth={true} /> : null}
             <p className={css.title}>{props.text}&nbsp;</p>
             <FontAwesomeIcon icon="angle-down" />
-            <CSSTransition
-                in={isActive}
-                timeout={500}
-                classNames={{
-                    enter: css.subMenuEnter,
-                    enterActive: css.subMenuEnterActive,
-                    exit: css.subMenuExit,
-                    exitActive: css.subMenuExitActive,
-                }}
-                unmountOnExit>
-                <div className={css.subMenu}>
-                    {props.subMenuItems ?
-                        props.subMenuItems.map(list =>
-                            <ul>
-                                {
-                                    list.map(item =>
-                                        <li onClick={item.onClick} className={item.isDisabled ? css.disabled : undefined}>
-                                            {item.icon ? <FontAwesomeIcon icon={item.icon} /> : null}&nbsp;
-                                            {item.name}
-                                        </li>
-                                    )
-                                }
-                            </ul>
-                        ) : <p>内容はないよ</p>
-                    }
-                </div>
-            </CSSTransition>
+            <Dropdown isActive={isActive} items={props.subMenuItems} align={props.align} />
         </a>
     );
 }
-
-type SubMenuItem = {
-    name?: string;
-    icon?: IconProp;
-    onClick?: () => void;
-    isDisabled?: boolean;
-};
 
 export function Menu(props: { user?: User }) {
     const history = useHistory();
@@ -106,7 +74,7 @@ export function Menu(props: { user?: User }) {
                 <FontAwesomeIcon icon="coffee" size="lg" />
             </div>
             <div className={css.right}>
-                {profileMenu ? <MenuItemWithSubMenu text={u!.name} subMenuItems={profileMenu} /> : null}
+                {profileMenu ? <MenuItemWithSubMenu text={u!.name} subMenuItems={profileMenu} icon="user-circle" align="right" /> : null}
             </div>
         </header>
     );

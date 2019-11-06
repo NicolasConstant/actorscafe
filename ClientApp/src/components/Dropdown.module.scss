@@ -1,0 +1,83 @@
+.subMenu {
+    position: absolute;
+    transform-origin: 50% 10%;
+    cursor: default;
+    width: 256px;
+    top: 100%;
+    background: var(--card-back);
+    box-shadow: 0 0 8px black;
+    color: var(--fore);
+    ul {
+        margin: 0;
+        padding: 0;
+        li {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0;
+            margin: 1px 0;
+            list-style: none;
+            transition: all 0.2s ease;
+
+            .icon {
+                padding-left: 16px;
+            }
+            
+            .text {
+                display: flex;
+                padding-left: 16px;
+                flex-direction: column;
+                align-items: flex-start;
+                h1 {
+                    font-size: 16px;
+                    margin: 0;
+                }
+
+                p {
+                    font-size: 14px;
+                    text-indent: 14px;
+                    margin: 0;
+                    font-weight: normal;
+                    opacity: 0.8;
+                }
+            }
+
+            &:not(.disabled):hover, &.selected {
+                background: var(--accent);
+                color: var(--accent-fore);
+            }
+            &.disabled {
+                color: #999;
+                cursor: default;
+            }
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--back);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+    }
+
+    $subMenuTransitionTime: 0.2s;
+
+    &Enter {
+        opacity: 0;
+        transform: scale(0.8, 0.3);
+
+        &Active {
+            opacity: 1;
+            transform: scale(1);
+            transition: all $subMenuTransitionTime ease;
+        }
+    }
+    &Exit {
+        opacity: 1;
+
+        &Active {
+            opacity: 0;
+            transform: scale(0.8, 0.3);
+            transition: all $subMenuTransitionTime ease;
+        }
+    }
+}

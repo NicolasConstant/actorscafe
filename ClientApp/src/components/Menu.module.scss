@@ -25,75 +25,15 @@
         align-items: center;
         user-select: none;
         cursor: pointer;
+        outline: none;
         transition: all 0.2s ease;
 
-
-        &:hover {
+        &:hover, &:focus {
             background: var(--accent-light);
         }
 
         .title {
             margin-left: 8px;
-        }
-
-        .subMenu {
-            position: absolute;
-            transform-origin: 70% 10%;
-            cursor: default;
-            right: 0;
-            width: 256px;
-            top: 100%;
-            background: var(--card-back);
-            box-shadow: 0 0 8px black;
-            color: var(--fore);
-            ul {
-                margin: 0;
-                padding: 0;
-                li {
-                    display: flex;
-                    align-items: center;
-                    cursor: pointer;
-                    padding: 8px 16px;
-                    list-style: none;
-                    transition: all 0.2s ease;
-
-                    &:not(.disabled):hover {
-                        background: var(--accent);
-                        color: var(--accent-fore);
-                    }
-                    &.disabled {
-                        color: #999;
-                        cursor: default;
-                    }
-                }
-                &:not(:last-child) {
-                    border-bottom: 1px solid var(--back);
-                    padding-bottom: 8px;
-                    margin-bottom: 8px;
-                }
-            }
-
-            $subMenuTransitionTime: 0.2s;
-
-            &Enter {
-                opacity: 0;
-                transform: scale(0.3);
-
-                &Active {
-                    opacity: 1;
-                    transform: scale(1);
-                    transition: all $subMenuTransitionTime ease;
-                }
-            }
-            &Exit {
-                opacity: 1;
-
-                &Active {
-                    opacity: 0;
-                    transform: scale(0.3);
-                    transition: all $subMenuTransitionTime ease;
-                }
-            }
         }
     }
 
