@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import marked from "marked";
 import { UIButton } from "../components/ui/UIButton";
 import { Container } from "../components/Container";
+import { UITextInput } from "../components/ui/UITextInput";
+import { UIPasswordInput } from "../components/ui/UIPasswordInput";
 
 export type WelcomeMode = "signup" | "signin";
 
@@ -14,7 +16,6 @@ export function Welcome(_: any) {
         current: "signin" as WelcomeMode,
         userName: "",
         password: "",
-        passwordConfirm: "",
         error: "",
         agreeToS: false,
         description: "",
@@ -57,7 +58,7 @@ export function Welcome(_: any) {
     }
 
     function confirmSignUp() {
-        return !!(state.password && state.userName && state.password === state.passwordConfirm && state.agreeToS);
+        return !!(state.password && state.userName && state.agreeToS);
     }
 
     function confirmSignIn() {
@@ -70,12 +71,8 @@ export function Welcome(_: any) {
             form =
                 <div>
                     <h3>お持ちのアカウントでログイン</h3>
-                    <label>
-                        ユーザー名: <input type="text" value={state.userName} onChange={ev => updateState({ userName: ev.target.value })} />
-                    </label>
-                    <label>
-                        パスワード: <input type="password" value={state.password} onChange={ev => updateState({ password: ev.target.value })} />
-                    </label>
+                    <UITextInput value={state.userName} placeholder="ユーザー名" onChange={ev => updateState({ userName: ev.target.value })} />
+                    <UIPasswordInput value={state.password} placeholder="パスワード" onChange={ev => updateState({ password: ev.target.value })} />
                     {state.error ? <p style={{ color: "red", fontWeight: "bold" }}>{state.error}</p> : null}
                     <UIButton inline={true} disabled={!confirmSignIn()} onClick={handleSignIn}>ログイン</UIButton>
                     <UIButton inline={true} link={true} onClick={() => changeMode("signup")}>アカウントを作成</UIButton>
@@ -85,15 +82,8 @@ export function Welcome(_: any) {
             form =
                 <div>
                     <h3>アカウントを作成</h3>
-                    <label>
-                        ユーザー名: <input type="text" value={state.userName} onChange={ev => updateState({ userName: ev.target.value })} />
-                    </label>
-                    <label>
-                        パスワード: <input type="password" value={state.password} onChange={ev => updateState({ password: ev.target.value })} />
-                    </label>
-                    <label>
-                        パスワード(確認): <input type="password" value={state.passwordConfirm} onChange={ev => updateState({ passwordConfirm: ev.target.value })} />
-                    </label>
+                    <UITextInput placeholder="ユーザー名" value={state.userName} onChange={ev => updateState({ userName: ev.target.value })} />
+                    <UIPasswordInput placeholder="パスワード" value={state.password} hasAutoComplete onChange={ev => updateState({ password: ev.target.value })} />
                     <label>
                         <input type="checkbox" checked={state.agreeToS} onChange={ev => updateState({ agreeToS: ev.target.checked })} />
                         <a href="/tos" target="_blank" rel="noopener noreferrer">利用規約</a>に同意する
@@ -110,7 +100,7 @@ export function Welcome(_: any) {
             break;
     }
     return (
-        <Container>
+        <Container style={{ maxWidth: "512px" }}>
             <div dangerouslySetInnerHTML={{ __html: marked(state.description) }} />
             {form}
         </Container>

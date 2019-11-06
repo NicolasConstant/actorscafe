@@ -79,3 +79,20 @@
         color: var(--fore);
     }
 }
+
+.passwordContainer {
+    position: relative;
+    margin-top: 24px;
+
+    .textInput {
+        margin-top: 0;
+    }
+}
+
+.passwordEye {
+    position: absolute;
+    right: 8px;
+    user-select: none;
+    top: 0;
+    bottom: 0;
+}
