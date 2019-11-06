@@ -12,6 +12,11 @@
     background: var(--accent);
     color: var(--accent-fore);
     font-weight: bold;
+    outline: none;
+    
+    &:focus {
+        border: 2px solid var(--accent-light);
+    }
 
     &:disabled {
         color: #9E9E9E;
