@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route } from "react-router";
+import { CSSTransition } from "react-transition-group";
 
 import { Layout } from "./pages/Layout";
 import { Index } from "./pages/Index";
@@ -10,23 +11,26 @@ import { Notifications } from "./pages/Notifications";
 import { Setting } from "./pages/Setting";
 import { UserDirectory } from "./pages/Users/Directory";
 import { ToS } from "./pages/ToS";
+
 import "sanitize.css";
 
-export default class App extends Component {
-  static displayName = App.name;
+const route = [
+  { path: "/", Component: Index },
+  { path: "/notifications", Component: Notifications },
+  { path: "/settings", Component: Setting },
+  { path: "/tos", Component: ToS },
+  { path: "/directory", Component: UserDirectory },
+  { path: "/@:name", Component: UsersIndex },
+  { path: "/@:name/following", Component: UsersFollowing },
+  { path: "/@:name/followers", Component: UsersFollowers },
+];
 
-  render() {
-    return (
-      <Layout>
-        <Route exact path="/" component={Index} />
-        <Route exact path="/notifications" component={Notifications} />
-        <Route exact path="/settings" component={Setting} />
-        <Route exact path="/tos" component={ToS} />
-        <Route exact path="/directory" component={UserDirectory} />
-        <Route exact path="/@:name" component={UsersIndex} />
-        <Route exact path="/@:name/following" component={UsersFollowing} />
-        <Route exact path="/@:name/followers" component={UsersFollowers} />
-      </Layout>
-    );
-  }
-}
+export function App() {
+  return (
+    <Layout>{
+      route.map(({ path, Component }) => (
+        <Route exact path={path} component={Component} />
+      ))
+    }</Layout>
+  );
+};

@@ -25,7 +25,7 @@ export function Home(_: any) {
     useEffect(() => { updateTimeline(); }, [store.user!.id]);
 
     const updateTimeline = async () => {
-        setState(prev => ({ ...prev, timeline: [], timelineState: "fetching" }));
+        setState(prev => ({ ...prev, timelineState: "fetching" }));
         try {
             const posts = await postWithTokenAsync<Post[]>("/my/timeline")
             setState(prev => ({ ...prev, timeline: posts, timelineState: "success" }));

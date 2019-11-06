@@ -25,7 +25,7 @@ function MenuItemWithSubMenu(props: { text?: string, icon?: IconProp, subMenuIte
             <FontAwesomeIcon icon="angle-down" />
             <CSSTransition
                 in={isActive}
-                timeout={150}
+                timeout={500}
                 classNames={{
                     enter: css.subMenuEnter,
                     enterActive: css.subMenuEnterActive,
@@ -74,6 +74,11 @@ export function Menu(props: { user?: User }) {
             {
                 name: "リスト(coming soon)",
                 icon: "list",
+                isDisabled: true,
+            },
+            {
+                name: "ブックマーク(coming soon)",
+                icon: "bookmark",
                 isDisabled: true,
             },
         ],

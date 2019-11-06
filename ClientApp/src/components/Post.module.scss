@@ -1,36 +1,38 @@
 .AcPost {
-    padding: 16px;
-    margin: 8px;
+	padding: 16px;
+	margin: 8px;
 
-    background: var(--card-back);
+	background: var(--card-back);
 
-    header {
-        display: flex;
-        font-size: 18px;
-        .name {
-            margin-right: 8px;
-            font-weight: 500;
-        }
+	header {
+		display: flex;
+		font-size: 18px;
+		.name {
+			margin-right: 8px;
+			font-weight: 500;
+		}
 
-        .acct {
-            color: #78909C;
-        }
+		.acct {
+			color: #78909C;
+		}
 
-        .time {
-            margin-left: auto;
-            color: #78909C;
-        }
-    }
+		.time {
+			margin-left: auto;
+			color: #78909C;
+		}
+	}
 
-    main {
-        font-size: 18px;
-        padding-left: 12px;
-    }
+	main {
+		font-size: 18px;
+		padding-left: 12px;
+	}
 
-    .cwButton {
-        border: none;
-        background: #78909C;
-        margin: 8px;
-        cursor: pointer;
-    }
+	.cwButton {
+		border: none;
+		background: #78909C;
+		margin: 8px;
+		cursor: pointer;
+	}
 }
+
+

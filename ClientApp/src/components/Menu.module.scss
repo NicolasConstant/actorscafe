@@ -25,18 +25,20 @@
         align-items: center;
         user-select: none;
         cursor: pointer;
+        transition: all 0.2s ease;
+
+
         &:hover {
             background: var(--accent-light);
         }
-        transition: all 0.2s ease;
 
         .title {
             margin-left: 8px;
         }
-        $subMenuTransitionTime: 0.15s;
 
         .subMenu {
             position: absolute;
+            transform-origin: 70% 10%;
             cursor: default;
             right: 0;
             width: 256px;
@@ -53,6 +55,8 @@
                     cursor: pointer;
                     padding: 8px 16px;
                     list-style: none;
+                    transition: all 0.2s ease;
+
                     &:not(.disabled):hover {
                         background: var(--accent);
                         color: var(--accent-fore);
@@ -68,23 +72,28 @@
                     margin-bottom: 8px;
                 }
             }
-        }
-        .subMenuEnter {
-            opacity: 0;
-            transform: scale(0.9);
-        }
-        .subMenuEnterActive {
-            opacity: 1;
-            transform: translateX(0);
-            transition: opacity $subMenuTransitionTime, transform $subMenuTransitionTime;
-        }
-        .subMenuExit {
-            opacity: 1;
-        }
-        .subMenuExitActive {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity $subMenuTransitionTime, transform $subMenuTransitionTime;
+
+            $subMenuTransitionTime: 0.2s;
+
+            &Enter {
+                opacity: 0;
+                transform: scale(0.3);
+
+                &Active {
+                    opacity: 1;
+                    transform: scale(1);
+                    transition: all $subMenuTransitionTime ease;
+                }
+            }
+            &Exit {
+                opacity: 1;
+
+                &Active {
+                    opacity: 0;
+                    transform: scale(0.3);
+                    transition: all $subMenuTransitionTime ease;
+                }
+            }
         }
     }
 

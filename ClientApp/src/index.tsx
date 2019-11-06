@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { store, persistor } from './store/store-api';
 import { PersistGate } from 'redux-persist/integration/react'
 
-import App from './App';
+import { App } from './App';
 import { registerIcons } from "./registerIcons";
 registerIcons();
 
