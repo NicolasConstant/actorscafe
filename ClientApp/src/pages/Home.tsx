@@ -82,7 +82,7 @@ export function Home(_: any) {
                     </UIButton>
                     <UIButton style={{ position: "relative" }} onClick={() => setIsVCVisible(!isVCVisible)}>
                         <FontAwesomeIcon icon={visibilityIconMap[visibility]} />
-                        <Dropdown isActive={isVCVisible} items={vcMenuItems} />
+                        <Dropdown isActive={isVCVisible} items={vcMenuItems} onDismissed={() => setIsVCVisible(false)} />
                     </UIButton>
                     <div className={css.right}>
                         {store.editorText ? 1000 - store.editorText.length : 1000}&emsp;

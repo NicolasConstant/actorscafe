@@ -24,7 +24,7 @@ function MenuItemWithSubMenu(props: { text?: string, icon?: IconProp, subMenuIte
             {props.icon ? <FontAwesomeIcon icon={props.icon} size="2x" fixedWidth={true} /> : null}
             <p className={css.title}>{props.text}&nbsp;</p>
             <FontAwesomeIcon icon="angle-down" />
-            <Dropdown isActive={isActive} items={props.subMenuItems} align={props.align} />
+            <Dropdown isActive={isActive} items={props.subMenuItems} align={props.align} onDismissed={() => setIsActive(false)} />
         </a>
     );
 }
