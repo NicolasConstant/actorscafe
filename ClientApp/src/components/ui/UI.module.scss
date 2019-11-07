@@ -1,7 +1,8 @@
-.button, .link {
+.button, .link, .static {
     display: flex;
     border: none;
     padding: 8px 16px;
+    position: relative;
     margin: 8px;
     font-size: 16px;
     cursor: pointer;
@@ -21,6 +22,21 @@
     &:disabled {
         color: #9E9E9E;
         background: #757575;
+    }
+}
+
+.static {
+    color: var(--fore);
+    background: transparent;
+    font-weight: bold;
+    outline: none;
+    
+    &:hover {
+        color: var(--accent)
+    }
+
+    &:disabled {
+        color: #9E9E9E;
     }
 }
 

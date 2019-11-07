@@ -6,6 +6,7 @@
     top: 100%;
     background: var(--card-back);
     box-shadow: 0 0 8px black;
+    z-index: 2;
     color: var(--fore);
     ul {
         margin: 0;
@@ -59,8 +60,6 @@
         }
     }
 
-    $subMenuTransitionTime: 0.2s;
-
     &Enter {
         opacity: 0;
         transform: scale(0.8, 0.3);
@@ -68,7 +67,7 @@
         &Active {
             opacity: 1;
             transform: scale(1);
-            transition: all $subMenuTransitionTime ease;
+            transition: all 0.2s ease;
         }
     }
     &Exit {
@@ -77,7 +76,7 @@
         &Active {
             opacity: 0;
             transform: scale(0.8, 0.3);
-            transition: all $subMenuTransitionTime ease;
+            transition: all 0.2s ease;
         }
     }
 }
