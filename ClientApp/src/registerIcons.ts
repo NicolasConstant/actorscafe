@@ -25,6 +25,7 @@ import {
     faList,
     faBookmark,
     faUserCircle,
+    faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 
 export function registerIcons() {
@@ -54,5 +55,6 @@ export function registerIcons() {
         faList,
         faBookmark,
         faUserCircle,
+        faThumbsUp,
     );
 }
