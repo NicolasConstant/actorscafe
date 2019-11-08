@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useStore } from "../store/module";
 import { toAcctString } from "../helpers/toAcctString";
 import { Card } from "./Card";
+import { UIButton } from "./ui/UIButton";
 
 export function UserHeader(props: { user: User, onFollowButtonClicked?: (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void, }) {
     const u = props.user;
@@ -40,9 +41,9 @@ export function UserHeader(props: { user: User, onFollowButtonClicked?: (ev: Rea
                         {
                             store.user && u.id !== store.user.id ?
                                 <div>
-                                    <button onClick={(s) => { if (props.onFollowButtonClicked) { props.onFollowButtonClicked(s); } }}>
+                                    <UIButton onClick={(s) => { if (props.onFollowButtonClicked) { props.onFollowButtonClicked(s); } }}>
                                         {u.isFollowed ? "フォロー解除" : "フォローする"}
-                                    </button>
+                                    </UIButton>
                                 </div>
                                 : null
                         }
