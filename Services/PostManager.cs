@@ -25,17 +25,44 @@ namespace ActorsCafe
                 UserId = userId,
             };
             collection!.Insert(p);
+
+            var um = Server.I.UserManager;
+            var u = um.Show(id: userId);
+            u!.PostsCount++;
+            um.UpdateUser(u);
+
             return p;
         }
 
         public void Delete(string postId)
         {
+            var um = Server.I.UserManager;
+            var u = um.Show(id: Show(postId)!.UserId);
+            u!.PostsCount--;
+            um.UpdateUser(u);
             collection!.Delete(postId);
         }
 
         public Post? Show(string id)
         {
             return collection?.FindById(id);
+        }
+
+        public int CountPostsOf(string userId)
+        {
+            return collection!.Count(p => p.UserId == userId);
+        }
+
+        public void Normalize()
+        {
+            collection!.Update(
+                collection.FindAll()
+                    .Select(p =>
+                    {
+                        p.RepostCount = collection!.Count(p2 => p.Id == p2.RepostId);
+                        return p;
+                    })
+            );
         }
 
         public IEnumerable<PackedPost> GetAllBy(string userId, string? filterUserId = null, int offset = 0, int limit = 100)

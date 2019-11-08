@@ -70,6 +70,22 @@ namespace ActorsCafe
             return collection!.Find(u => true, offset, limit);
         }
 
+        public void Normalize()
+        {
+            var p = Server.I.PostManager;
+            var f = Server.I.FollowingManager;
+            collection!.Update(
+                collection.FindAll()
+                    .Select(u =>
+                    {
+                        u.PostsCount = p.CountPostsOf(u.Id);
+                        u.FollowingsCount = f.CountFollowings(u.Id);
+                        u.FollowersCount = f.CountFollowers(u.Id);
+                        return u;
+                    })
+            );
+        }
+
         public void UpdateUser(InternalUser user)
         {
             collection!.Update(user);

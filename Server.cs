@@ -24,6 +24,12 @@ namespace ActorsCafe
 
         public string? Description { get; } = File.Exists("./description.md") ? File.ReadAllText("./description.md") : null;
 
+        public void Normalize()
+        {
+            UserManager.Normalize();
+            PostManager.Normalize();
+        }
+
         public void Dispose()
         {
             DatabaseRef?.Dispose();

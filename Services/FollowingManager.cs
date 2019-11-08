@@ -13,7 +13,8 @@ namespace ActorsCafe
         {
             var id = $"{me.Id}-{followee.Id}";
             if (IsFollowing(me, followee)) throw new ArgumentException("Already following");
-            collection!.Insert(new Following{
+            collection!.Insert(new Following
+            {
                 Id = id,
                 followerId = me.Id,
                 followeeId = followee.Id,
@@ -46,5 +47,9 @@ namespace ActorsCafe
         {
             return collection!.Find(f => f.followeeId == userId, offset, limit).Select(f => f.followerId);
         }
+
+        public int CountFollowings(string userId) => collection!.Count(f => f.followerId == userId);
+
+        public int CountFollowers(string userId) => collection!.Count(f => f.followeeId == userId);
     }
 }
