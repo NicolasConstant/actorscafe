@@ -17,6 +17,7 @@ export type PostState = {
 
 export function Post(props: { post: ACPost }) {
     const p = props.post;
+    const url = `${window.location.origin}/posts/${p.id}`;
     const store = useStore();
     const acct = toAcctString(p.user);
     const [state, setState] = useState<PostState>({
@@ -40,7 +41,7 @@ export function Post(props: { post: ACPost }) {
             name: "リンクをコピー",
             icon: "link",
             onClick() {
-                navigator.clipboard.writeText(`${window.location.origin}/posts/${p.id}`)
+                navigator.clipboard.writeText(url)
                     .then(() => alert("コピーしました！"))
                     .catch(() => alert("失敗しました！"));
             }
@@ -64,7 +65,7 @@ export function Post(props: { post: ACPost }) {
                 <div className={css.acct}>{acct}</div>
                 {p.user.isBot ? <div>🤖</div> : null}
                 {p.user.isCat ? <div>😺</div> : null}
-                <div className={css.time}>{moment(p.createdAt).fromNow()}</div>
+                <a href={url} className={css.time}>{moment(p.createdAt).fromNow()}</a>
             </header>
             <main>
                 {

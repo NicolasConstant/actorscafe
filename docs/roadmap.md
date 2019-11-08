@@ -1,6 +1,6 @@
 # Roadmap
 
-## pre-alpha
+## pre-alpha.1
 
 - [x] Create an account
 - [x] Sign in
@@ -8,24 +8,32 @@
 - [x] Timeline
 - [x] Follow a user
 
-## alpha.1
+## pre-alpha.2
 
 - [x] Change your profile
     - without avatar and header
-- [ ] Delete a post
 - [x] Cat Mode (な to にゃ)
-- [ ] Repost
-- [ ] Reply
-- [ ] Reaction
+- [x] Copy URL of posts
+- [x] Copy body of posts
+- [x] Set visibility
+- [x] Delete a post
+- [x] Apply design
+- [x] Post page
 - Simple Formatting
     - [ ] New Line
     - [ ] URL
-    - [ ] Hashtag
     - [ ] Mention
+
+## alpha.1
+
+- [ ] Repost
+- [ ] Reply
+- [ ] Reaction
 - [ ] Streaming API
+- Simple Formatting
+    - [ ] Hashtag
+- [ ] Simple Searching of Hashtag
 - [ ] Notification
-- [x] Set visibility
-- [ ] Apply design
 
 ## alpha.2
 

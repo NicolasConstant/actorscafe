@@ -11,6 +11,7 @@ import { Notifications } from "./pages/Notifications";
 import { Setting } from "./pages/Setting";
 import { UserDirectory } from "./pages/Users/Directory";
 import { ToS } from "./pages/ToS";
+import { Posts } from "./pages/Posts";
 
 import "sanitize.css";
 
@@ -23,6 +24,7 @@ const route = [
   { path: "/@:name", Component: UsersIndex },
   { path: "/@:name/following", Component: UsersFollowing },
   { path: "/@:name/followers", Component: UsersFollowers },
+  { path: "/posts/:id", Component: Posts },
 ];
 
 export function App() {
