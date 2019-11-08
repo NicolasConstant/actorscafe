@@ -60,11 +60,21 @@
         display: flex;
         height: 100%;
     }
-    @media screen and (max-width: 900px) { 
-        .menuItem, .menuItemActive {
-            .title {
-                display: none;
-            }
+}
+
+
+@media screen and (max-width: 900px) { 
+    .menuItem, .menuItemActive {
+        .title {
+            display: none;
         }
+    }
+}
+@media screen and (max-width: 550px) { 
+    .menu {
+        height: 48px;
+    }
+    .middle {
+        display: none;
     }
 }

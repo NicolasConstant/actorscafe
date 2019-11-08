@@ -26,3 +26,11 @@
         }
     }
 }
+
+@media screen and (max-width: 550px) { 
+    .postForm {
+        top: 48px;
+        left: 0;
+        right: 0;
+    }
+}

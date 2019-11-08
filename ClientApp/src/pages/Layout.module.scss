@@ -37,7 +37,7 @@ a {
 }
 
 .layout {
-    padding-top: 96px;
+    padding-top: 72px;
     position: relative;
 }
 
@@ -45,4 +45,10 @@ a {
     text-align: center;
     opacity: 0.8;
     padding: 32px 0;
+}
+
+@media screen and (max-width: 550px) { 
+    .layout {
+        padding-top: 48px;
+    }
 }
