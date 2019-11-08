@@ -29,7 +29,7 @@ export function App() {
   return (
     <Layout>{
       route.map(({ path, Component }) => (
-        <Route exact path={path} component={Component} />
+        <Route key={path} exact path={path} component={Component} />
       ))
     }</Layout>
   );

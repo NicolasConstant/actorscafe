@@ -14,6 +14,10 @@
         flex-direction: row;
         align-items: center;
 
+        &>*:not(:last-child) {
+            margin-right: 4px;
+        }
+
         .right {
             display: flex;
             margin-left: auto;

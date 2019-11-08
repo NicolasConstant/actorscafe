@@ -8,6 +8,7 @@ import { UIButton } from "../components/ui/UIButton";
 import { Container } from "../components/Container";
 import { UITextInput } from "../components/ui/UITextInput";
 import { UIPasswordInput } from "../components/ui/UIPasswordInput";
+import { UICheckBox } from "../components/ui/UICheckBox";
 
 export type WelcomeMode = "signup" | "signin";
 
@@ -74,8 +75,8 @@ export function Welcome(_: any) {
                     <UITextInput value={state.userName} placeholder="ユーザー名" onChange={ev => updateState({ userName: ev.target.value })} />
                     <UIPasswordInput value={state.password} placeholder="パスワード" onChange={ev => updateState({ password: ev.target.value })} />
                     {state.error ? <p style={{ color: "red", fontWeight: "bold" }}>{state.error}</p> : null}
-                    <UIButton inline={true} disabled={!confirmSignIn()} onClick={handleSignIn}>ログイン</UIButton>
-                    <UIButton inline={true} link={true} onClick={() => changeMode("signup")}>アカウントを作成</UIButton>
+                    <UIButton inline disabled={!confirmSignIn()} onClick={handleSignIn}>ログイン</UIButton>
+                    <UIButton inline link onClick={() => changeMode("signup")}>アカウントを作成</UIButton>
                 </div>;
             break;
         case "signup":
@@ -85,12 +86,13 @@ export function Welcome(_: any) {
                     <UITextInput placeholder="ユーザー名" value={state.userName} onChange={ev => updateState({ userName: ev.target.value })} />
                     <UIPasswordInput placeholder="パスワード" value={state.password} hasAutoComplete onChange={ev => updateState({ password: ev.target.value })} />
                     <label>
-                        <input type="checkbox" checked={state.agreeToS} onChange={ev => updateState({ agreeToS: ev.target.checked })} />
-                        <a href="/tos" target="_blank" rel="noopener noreferrer">利用規約</a>に同意する
+                        <UICheckBox checked={state.agreeToS} onChange={ev => updateState({ agreeToS: ev.target.checked })}>
+                            <a href="/tos" target="_blank" rel="noopener noreferrer">利用規約</a>に同意する
+                        </UICheckBox>
                     </label>
                     {state.error ? <p style={{ color: "red", fontWeight: "bold" }}>{state.error}</p> : null}
-                    <UIButton inline={true} disabled={!confirmSignUp()} onClick={handleSignUp}>登録</UIButton>
-                    <UIButton inline={true} link={true} onClick={() => changeMode("signin")}>お持ちのアカウントでログイン</UIButton>
+                    <UIButton inline disabled={!confirmSignUp()} onClick={handleSignUp}>登録</UIButton>
+                    <UIButton inline link onClick={() => changeMode("signin")}>お持ちのアカウントでログイン</UIButton>
                 </div>;
             break;
         default:

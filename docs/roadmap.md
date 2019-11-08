@@ -15,6 +15,7 @@
 - [ ] Delete a post
 - [ ] Cat Mode (な to にゃ)
 - [ ] Repost
+- [ ] Reply
 - [ ] Reaction
 - Simple Formatting
     - [ ] New Line
@@ -23,7 +24,7 @@
     - [ ] Mention
 - [ ] Streaming API
 - [ ] Notification
-- [ ] Set visibility
+- [x] Set visibility
 - [ ] Apply design
 
 ## alpha.2

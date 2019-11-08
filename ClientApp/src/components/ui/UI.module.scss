@@ -1,17 +1,21 @@
 .button, .link, .static {
     display: flex;
     border: none;
+    align-items: center;
+    justify-content: center;
     padding: 8px 16px;
     position: relative;
-    margin: 8px;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.2s ease;
+    
+    margin: 8px 0;
 }
 
 .button {
     background: var(--accent);
     color: var(--accent-fore);
+    border: 2px solid transparent;
     font-weight: bold;
     outline: none;
     
@@ -64,7 +68,7 @@
     outline: none;
     transition: border-color 0.2s ease;
     font-size: 16px;
-    margin-top: 24px;
+    margin: 12px 0;
 
     &:focus {
         border-color: var(--accent);
@@ -85,7 +89,7 @@
     outline: none;
     transition: all 0.2s ease;
     font-size: 16px;
-    margin-top: 24px;
+    margin: 12px 0;
 
     &:focus {
         border-color: var(--accent);
@@ -111,4 +115,38 @@
     user-select: none;
     top: 0;
     bottom: 0;
+}
+
+.checkBox {
+    display: block;
+    margin: 12px 0;
+    user-select: none;
+    cursor: pointer;
+
+    >input[type="checkbox"] {
+        display: none;
+        &:checked+span::before {
+            background: var(--accent);
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: 16px 16px;
+            background-repeat: no-repeat;
+            border: 0;
+        }
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        &::before {
+            content: "";
+            display: inline-block;
+            transition: all 0.2s ease;
+            margin-right: 8px;
+            background: transparent;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--fore-dark);
+        }
+    }
 }

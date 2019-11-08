@@ -14,7 +14,8 @@ namespace ActorsCafe
         {
             if (collection!.Exists(f => f.Name.ToLowerInvariant() == name.ToLowerInvariant()))
                 throw new ArgumentException("already exists");
-            if (!name.IsValidUserName()) {
+            if (!name.IsValidUserName())
+            {
                 throw new ArgumentException("invalid user name");
             }
             var ts = DateTime.Now;
@@ -67,6 +68,11 @@ namespace ActorsCafe
         public IEnumerable<InternalUser> EnumerateAll(int offset = 0, int limit = 100)
         {
             return collection!.Find(u => true, offset, limit);
+        }
+
+        public void UpdateUser(InternalUser user)
+        {
+            collection!.Update(user);
         }
     }
 }

@@ -15,9 +15,12 @@ export const mod = createSlice({
     name: "actorscafe",
     initialState: {} as State,
     reducers: {
-        setToken(state, {payload}) {
+        setToken(state, { payload }) {
             state.token = payload.token;
             state.user = payload.user;
+        },
+        setUser(state, { payload }) {
+            state.user = payload;
         },
         resetToken(state) {
             state.token = undefined;
