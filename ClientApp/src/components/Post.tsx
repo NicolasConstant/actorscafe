@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dropdown, SubMenuItem } from "./Dropdown";
 import { postAsync } from "../services/api";
 import { useStore } from "../store/module";
+import { format } from "../helpers/format";
 moment.locale("ja");
 
 export type PostState = {
@@ -27,30 +28,30 @@ export function Post(props: { post: ACPost }) {
 
     const moreItems: SubMenuItem[][] = [[
         {
-            name: "投稿をコピー",
+            name: "ćç¨żăăłăăź",
             icon: "copy",
             onClick() {
                 if (p.text) {
                     navigator.clipboard.writeText(p.text)
-                        .then(() => alert("コピーしました！"))
-                        .catch(() => alert("失敗しました！"));
+                        .then(() => alert("ăłăăźăăžăăďź"))
+                        .catch(() => alert("ĺ¤ąćăăžăăďź"));
                 }
             }
         },
         {
-            name: "リンクをコピー",
+            name: "ăŞăłăŻăăłăăź",
             icon: "link",
             onClick() {
                 navigator.clipboard.writeText(url)
-                    .then(() => alert("コピーしました！"))
-                    .catch(() => alert("失敗しました！"));
+                    .then(() => alert("ăłăăźăăžăăďź"))
+                    .catch(() => alert("ĺ¤ąćăăžăăďź"));
             }
         }
     ]];
 
     if (store.user && (store.user.id === p.userId || store.user.isAdmin || store.user.isModerator)) {
         moreItems.push([{
-            name: "投稿を削除",
+            name: "ćç¨żăĺé¤",
             icon: "trash-alt",
             onClick() {
                 postAsync("posts/delete", { postId: p.id })
@@ -58,13 +59,15 @@ export function Post(props: { post: ACPost }) {
         }]);
     }
 
+    const body = <div dangerouslySetInnerHTML={{ __html: format(p.text || "") }} />;
+
     return (
         <article className={css.AcPost}>
             <header>
                 <div className={css.name}>{p.user.profileName || p.user.name}</div>
                 <div className={css.acct}>{acct}</div>
-                {p.user.isBot ? <div>🤖</div> : null}
-                {p.user.isCat ? <div>😺</div> : null}
+                {p.user.isBot ? <div>đ¤</div> : null}
+                {p.user.isCat ? <div>đş</div> : null}
                 <a href={url} className={css.time}>{moment(p.createdAt).fromNow()}</a>
             </header>
             <main>
@@ -74,18 +77,18 @@ export function Post(props: { post: ACPost }) {
                             <div>
                                 {p.cw}
                                 <button className={css.cwButton} onClick={() => setState(prev => ({ cwOpened: !prev.cwOpened }))}>
-                                    {state.cwOpened ? "隠す" : "見る"}
+                                    {state.cwOpened ? "é ă" : "čŚă"}
                                 </button>
                             </div>
-                            {state.cwOpened ? p.text : null}
+                            {state.cwOpened ? body : null}
                         </div>
-                    ) : <div>{p.text}</div>
+                    ) : body
                 }
             </main>
             <footer>
-                <UIButton inline static onClick={() => alert("未実装")}><FontAwesomeIcon icon="reply" /></UIButton>
-                <UIButton inline static onClick={() => alert("未実装")}><FontAwesomeIcon icon="retweet" /></UIButton>
-                <UIButton inline static onClick={() => alert("未実装")}><FontAwesomeIcon icon="thumbs-up" /></UIButton>
+                <UIButton inline static onClick={() => alert("ćŞĺŽčŁ")}><FontAwesomeIcon icon="reply" /></UIButton>
+                <UIButton inline static onClick={() => alert("ćŞĺŽčŁ")}><FontAwesomeIcon icon="retweet" /></UIButton>
+                <UIButton inline static onClick={() => alert("ćŞĺŽčŁ")}><FontAwesomeIcon icon="thumbs-up" /></UIButton>
                 <UIButton inline static onClick={() => setMore(!more)}><FontAwesomeIcon icon="ellipsis-h" />
                     <Dropdown isActive={more} items={moreItems} align="right" onDismissed={() => setMore(false)} />
                 </UIButton>
