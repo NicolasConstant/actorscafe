@@ -16,7 +16,7 @@ namespace ActorsCafe
 
         public static LiteDatabase DatabaseRef => dbRef != null ? dbRef : dbRef = new LiteDatabase("filename=./database.db;mode=Exclusive");
 
-        public string Version { get; } = "alpha.1";
+        public string Version { get; } = "prealpha.2";
 
         public string CodeName { get; } = "Apple Pie";
 

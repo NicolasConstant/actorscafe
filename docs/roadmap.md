@@ -20,9 +20,9 @@
 - [x] Apply design
 - [x] Post page
 - Simple Formatting
-    - [ ] New Line
-    - [ ] URL
-    - [ ] Mention
+    - [x] New Line
+    - [x] URL
+    - [x] Mention
 
 ## alpha.1
 
