@@ -9,7 +9,7 @@ namespace ActorsCafe.Endpoints
     {
         public override object Handle(JObject param, string token, InternalUser? me)
         {
-            var id = GetOptional<string>(param, "id");
+            var id = GetOptional<string>(param, "postId");
             var name = GetOptional<string>(param, "userName");
             var host = GetOptional<string>(param, "host");
 
@@ -21,7 +21,7 @@ namespace ActorsCafe.Endpoints
                 user = Users.Show(name: name, host: host);
             else
                 throw new HttpErrorException(404, "specify id or name");
-            
+
             return user?.Pack(me) ?? throw new HttpErrorException(404, "No such user");
         }
     }

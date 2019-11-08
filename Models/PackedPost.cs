@@ -8,6 +8,7 @@ namespace ActorsCafe
         public PackedPost? Reply { get; set; }
         public PackedPost? Repost { get; set; }
         public User User { get; set; }
+        public string? UnnyaizedText { get; set; }
 
         public PackedPost(Post p)
         {
@@ -20,12 +21,12 @@ namespace ActorsCafe
             if (RepostId != null)
             {
                 var repost = Server.I.PostManager.Show(RepostId);
-                Repost = repost != null ?  new PackedPost(repost) : null;
+                Repost = repost != null ? new PackedPost(repost) : null;
             }
 
             Id = p.Id;
             UserId = p.UserId;
-            Text = p.Text;
+            Text = UnnyaizedText = p.Text;
             Cw = p.Cw;
             Visibility = p.Visibility;
             CreatedAt = p.CreatedAt;
@@ -34,8 +35,12 @@ namespace ActorsCafe
             ReplyId = p.ReplyId;
             RepostId = p.RepostId;
 
-            
             User = Server.I.UserManager.Show(id: p.UserId)!.Pack();
+
+            if (User.IsCat && Text != null)
+            {
+                Text = Text.Replace("な", "にゃ").Replace("ナ", "ニャ").Replace("ﾅ", "ﾆｬ");
+            }
         }
     }
 }

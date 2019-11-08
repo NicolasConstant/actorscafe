@@ -10,10 +10,10 @@ namespace ActorsCafe.Endpoints
     {
         public override object Handle(JObject param, string token, InternalUser? user)
         {
-            var id = GetRequired<string>(param, "id");
+            var id = GetRequired<string>(param, "postId");
 
             var post = Posts.Show(id) ?? throw new HttpErrorException(404, "No such post");
-            
+
             return new PackedPost(post);
         }
     }

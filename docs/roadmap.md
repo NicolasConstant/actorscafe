@@ -10,10 +10,10 @@
 
 ## alpha.1
 
-- [ ] Change your profile
+- [x] Change your profile
     - without avatar and header
 - [ ] Delete a post
-- [ ] Cat Mode (な to にゃ)
+- [x] Cat Mode (な to にゃ)
 - [ ] Repost
 - [ ] Reply
 - [ ] Reaction

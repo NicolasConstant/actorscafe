@@ -28,9 +28,9 @@ namespace ActorsCafe
             return p;
         }
 
-        public void Delete(string noteId)
+        public void Delete(string postId)
         {
-            collection!.Delete(noteId);
+            collection!.Delete(postId);
         }
 
         public Post? Show(string id)
