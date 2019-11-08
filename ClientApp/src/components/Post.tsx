@@ -10,6 +10,7 @@ import { Dropdown, SubMenuItem } from "./Dropdown";
 import { postAsync } from "../services/api";
 import { useStore } from "../store/module";
 import { format } from "../helpers/format";
+import { Link } from "react-router-dom";
 moment.locale("ja");
 
 export type PostState = {
@@ -64,7 +65,9 @@ export function Post(props: { post: ACPost }) {
     return (
         <article className={css.AcPost}>
             <header>
-                <div className={css.name}>{p.user.profileName || p.user.name}</div>
+                <Link to={`/${toAcctString(p.user)}`} style={{ textDecoration: "none" }}>
+                    <div className={css.name}>{p.user.profileName || p.user.name}</div>
+                </Link>
                 <div className={css.acct}>{acct}</div>
                 {p.user.isBot ? <div>🤖</div> : null}
                 {p.user.isCat ? <div>😺</div> : null}
